@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:template/src/config/routes/bloc.dart';
-import 'package:template/src/config/routes/cubit.dart';
-import 'package:template/src/config/routes/main.dart';
+import 'package:upwind/src/config/routes/bloc.dart';
+import 'package:upwind/src/config/routes/cubit.dart';
+import 'package:upwind/src/config/routes/main.dart';
 
 part 'routes.gr.dart';
 

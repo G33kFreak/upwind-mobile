@@ -9,10 +9,11 @@
       "request": "launch",
       "type": "dart",
       "args": [
-        "--dart-define=APP_NAME=Dev app",
+        "--dart-define=APP_NAME=Upwind-dev",
         "--dart-define=APP_SUFFIX=.dev",
         "--dart-define=SENTRY_DSN=value",
-        "--dart-define=SENTRY_ENVIRONMENT=development"
+        "--dart-define=SENTRY_ENVIRONMENT=development",
+        "--dart-define=BASE_URL=http://127.0.0.1:8000/"
       ]
     },
     {
@@ -21,10 +22,11 @@
       "type": "dart",
       "flutterMode": "profile",
       "args": [
-        "--dart-define=APP_NAME=Dev app",
+        "--dart-define=APP_NAME=Upwind-dev",
         "--dart-define=APP_SUFFIX=.dev",
         "--dart-define=SENTRY_DSN=value",
-        "--dart-define=SENTRY_ENVIRONMENT=development"
+        "--dart-define=SENTRY_ENVIRONMENT=development",
+        "--dart-define=BASE_URL=http://127.0.0.1:8000/"
       ]
     },
     {
@@ -32,7 +34,7 @@
       "request": "launch",
       "type": "dart",
       "args": [
-        "--dart-define=APP_NAME=Prod app",
+        "--dart-define=APP_NAME=Upwind",
         "--dart-define=SENTRY_DSN=value",
         "--dart-define=SENTRY_ENVIRONMENT=production"
       ]
@@ -43,7 +45,7 @@
       "type": "dart",
       "flutterMode": "profile",
       "args": [
-        "--dart-define=APP_NAME=Prod app",
+        "--dart-define=APP_NAME=Upwind",
         "--dart-define=SENTRY_DSN=value",
         "--dart-define=SENTRY_ENVIRONMENT=production"
       ]
