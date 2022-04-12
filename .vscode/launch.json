@@ -13,7 +13,7 @@
         "--dart-define=APP_SUFFIX=.dev",
         "--dart-define=SENTRY_DSN=value",
         "--dart-define=SENTRY_ENVIRONMENT=development",
-        "--dart-define=BASE_URL=http://127.0.0.1:8000/"
+        "--dart-define=BASE_URL=http://127.0.0.1:8000"
       ]
     },
     {
@@ -26,7 +26,7 @@
         "--dart-define=APP_SUFFIX=.dev",
         "--dart-define=SENTRY_DSN=value",
         "--dart-define=SENTRY_ENVIRONMENT=development",
-        "--dart-define=BASE_URL=http://127.0.0.1:8000/"
+        "--dart-define=BASE_URL=http://127.0.0.1:8000"
       ]
     },
     {

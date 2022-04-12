@@ -22,8 +22,11 @@ class AuthenticationRepository
   }
 
   @override
-  Future<void> logIn(Dio client,
-      {required String email, required String password}) {
+  Future<void> logIn(
+    Dio client, {
+    required String email,
+    required String password,
+  }) {
     // TODO: implement logIn
     throw UnimplementedError();
   }
