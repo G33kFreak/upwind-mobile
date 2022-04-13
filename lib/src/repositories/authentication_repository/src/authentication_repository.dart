@@ -1,55 +1,91 @@
-import 'package:dio/src/dio.dart';
+import 'dart:async';
+
+import 'package:dio/dio.dart';
+import 'package:upwind/src/config/api/exceptions.dart';
 import 'package:upwind/src/repositories/authentication_repository/authentication_repository.dart';
 import 'package:upwind/src/services/hive.dart';
 
 class AuthenticationRepository
     with IHiveRepository<Tokens>
     implements IAuthenticationRepository {
-  @override
-  // TODO: implement boxKey
-  String get boxKey => throw UnimplementedError();
+  final Dio httpClient;
+  final LogIn logIn;
+  final RefreshTokens refreshTokens;
+
+  AuthenticationRepository(
+    this.httpClient, {
+    required this.logIn,
+    required this.refreshTokens,
+  });
 
   @override
-  Future<void> clearTokens() {
-    // TODO: implement clearTokens
-    throw UnimplementedError();
+  String get boxKey => 'tokensBox';
+
+  @override
+  String get tokensKey => 'tokensKey';
+
+  @override
+  StreamController<AuthenticationStatus>? controller =
+      StreamController<AuthenticationStatus>.broadcast();
+
+  @override
+  Stream<AuthenticationStatus> get status async* {
+    final tokens = await getTokens();
+
+    if (tokens != null) {
+      yield AuthenticationStatus.authenticated;
+    } else {
+      yield AuthenticationStatus.unauthenticated;
+    }
+
+    yield* controller!.stream;
   }
 
   @override
-  Tokens? getTokens() {
-    // TODO: implement getTokens
-    throw UnimplementedError();
+  Future<void> clearTokens() async {
+    (await box).clear();
   }
 
   @override
-  Future<void> logIn(
-    Dio client, {
+  Future<Tokens?> getTokens() async => (await box).get(tokensKey);
+
+  @override
+  Future<void> saveTokens(Tokens tokens) async {
+    (await box).put(tokensKey, tokens);
+    controller?.add(AuthenticationStatus.authenticated);
+  }
+
+  @override
+  Future<void> performLogIn({
     required String email,
     required String password,
-  }) {
-    // TODO: implement logIn
-    throw UnimplementedError();
+  }) async {
+    final response = await logIn(httpClient, email: email, password: password);
+    try {
+      Tokens.fromJson(response.data);
+    } catch (e) {
+      throw ApiResponseParseException(e.toString());
+    }
   }
 
   @override
-  Future<void> logOut() {
-    // TODO: implement logOut
-    throw UnimplementedError();
+  Future<void> logOut() async {
+    await clearTokens();
+    controller?.add(AuthenticationStatus.unauthenticated);
   }
 
   @override
-  Future<void> refreshTokens(Dio client) {
-    // TODO: implement refreshTokens
-    throw UnimplementedError();
+  Future<void> performRefreshTokens({required String refreshToken}) async {
+    final response = await refreshTokens(
+      httpClient,
+      refreshToken: refreshToken,
+    );
+    try {
+      Tokens.fromJson(response.data);
+    } catch (e) {
+      throw ApiResponseParseException(e.toString());
+    }
   }
 
-  @override
-  Future<void> saveTokens(Tokens tokens) {
-    // TODO: implement saveTokens
-    throw UnimplementedError();
-  }
-
-  @override
-  // TODO: implement status
-  Stream<AuthenticationStatus> get status => throw UnimplementedError();
+  void dispose() => controller!.close();
 }
