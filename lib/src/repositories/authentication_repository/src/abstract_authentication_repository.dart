@@ -1,28 +1,12 @@
-import 'package:dio/dio.dart';
-import 'package:upwind/src/repositories/authentication_repository/src/models/tokens.dart';
-
-enum AuthenticationStatus {
-  unknown,
-  authenticated,
-  unauthenticated,
-}
+import 'dart:async';
 
 abstract class IAuthenticationRepository {
-  Stream<AuthenticationStatus> get status;
-
-  Tokens? getTokens();
-
-  Future<void> saveTokens(Tokens tokens);
-
-  Future<void> clearTokens();
-
-  Future<void> logIn(
-    Dio client, {
+  Future<void> performLogIn({
     required String email,
     required String password,
   });
 
-  Future<void> refreshTokens(Dio client);
+  Future<void> performRefreshTokens({required String refreshToken});
 
   Future<void> logOut();
 }
