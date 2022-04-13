@@ -36,17 +36,4 @@ class AuthenticationRepository implements IAuthenticationRepository {
     await tokensRepository.clearTokens();
     tokensRepository.controller?.add(AuthenticationStatus.unauthenticated);
   }
-
-  @override
-  Future<void> performRefreshTokens({required String refreshToken}) async {
-    final response = await refreshTokens(
-      httpClient,
-      refreshToken: refreshToken,
-    );
-    try {
-      Tokens.fromJson(response.data);
-    } catch (e) {
-      throw ApiResponseParseException(e.toString());
-    }
-  }
 }

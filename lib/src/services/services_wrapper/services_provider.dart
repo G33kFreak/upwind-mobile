@@ -18,7 +18,7 @@ class ServicesProvider extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<ITokensRepository>(
-          create: (context) => TokensRepository(),
+          create: (context) => TokensRepository(refreshTokens: refreshTokens),
         ),
         RepositoryProvider<ApiProvider>(
           create: (context) => ApiProvider(

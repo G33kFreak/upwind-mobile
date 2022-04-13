@@ -6,7 +6,5 @@ abstract class IAuthenticationRepository {
     required String password,
   });
 
-  Future<void> performRefreshTokens({required String refreshToken});
-
   Future<void> logOut();
 }
