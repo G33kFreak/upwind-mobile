@@ -32,5 +32,6 @@ class HabitDetails extends HabitListItem {
   factory HabitDetails.fromJson(Map<String, dynamic> json) =>
       _$HabitDetailsFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$HabitDetailsToJson(this);
 }

@@ -2,13 +2,13 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:http_status_code/http_status_code.dart';
-import 'package:upwind/src/repositories/authentication_repository/authentication_repository.dart';
+import 'package:upwind/src/repositories/tokens_repository/src/abstract_tokens_repository.dart';
 
 class MInterceptor implements InterceptorsWrapper {
-  final IAuthenticationRepository _authenticationRepository;
+  final ITokensRepository _tokensRepository;
 
-  MInterceptor(IAuthenticationRepository authenticationRepository)
-      : _authenticationRepository = authenticationRepository;
+  MInterceptor(ITokensRepository _tokensRepository)
+      : _tokensRepository = _tokensRepository;
 
   final unauthCodes = [StatusCode.UNAUTHORIZED, StatusCode.FORBIDDEN];
 
@@ -17,7 +17,7 @@ class MInterceptor implements InterceptorsWrapper {
     final statusCode = err.response?.statusCode;
 
     if (unauthCodes.contains(statusCode)) {
-      await _authenticationRepository.clearTokens();
+      await _tokensRepository.clearTokens();
       return handler.reject(err);
     }
 
@@ -29,7 +29,7 @@ class MInterceptor implements InterceptorsWrapper {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
-    final token = await _authenticationRepository.getTokens();
+    final token = await _tokensRepository.getTokens();
 
     if (token != null) {
       options.headers[HttpHeaders.authorizationHeader] =
