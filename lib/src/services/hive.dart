@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:upwind/src/repositories/authentication_repository/authentication_repository.dart';
 
 Future<void> setupHive() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -8,7 +9,7 @@ Future<void> setupHive() async {
 }
 
 void _registerAdapters() {
-  //Hive.registerAdapter<User>(UserAdapter());
+  Hive.registerAdapter<Tokens>(TokensAdapter());
 }
 
 abstract class IHiveRepository<E> {
