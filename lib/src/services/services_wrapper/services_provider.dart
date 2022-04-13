@@ -4,6 +4,7 @@ import 'package:upwind/src/config/api/clients.dart';
 import 'package:upwind/src/repositories/authentication_repository/authentication_repository.dart';
 import 'package:upwind/src/repositories/tokens_repository/src/abstract_tokens_repository.dart';
 import 'package:upwind/src/repositories/tokens_repository/src/tokens_repository.dart';
+import 'package:upwind/src/services/authentication/bloc/authentication_bloc.dart';
 
 class ServicesProvider extends StatelessWidget {
   final Widget child;
@@ -34,7 +35,13 @@ class ServicesProvider extends StatelessWidget {
           ),
         )
       ],
-      child: child,
+      child: BlocProvider<AuthenticationBloc>(
+        create: (context) => AuthenticationBloc(
+          tokensRepository: context.read<ITokensRepository>(),
+          httpClient: context.read<ApiProvider>().httpClient,
+        ),
+        child: child,
+      ),
     );
   }
 }
