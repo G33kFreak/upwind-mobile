@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:upwind/src/config/routes.dart';
+import 'package:upwind/src/config/theme.dart';
 import 'package:upwind/src/services/services_wrapper/services_provider.dart';
 import 'package:upwind/src/services/services_wrapper/services_wrapper.dart';
 
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
           // Define a light and dark color theme. Then, read the user's
           // preferred ThemeMode (light, dark, or system default) from the
           // SettingsController to display the correct theme.
-          theme: ThemeData(),
+          theme: AppTheme.mainTheme,
           builder: (context, child) => ServicesWrapper(
             router: _router,
             child: child,

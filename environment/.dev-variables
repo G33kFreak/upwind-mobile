@@ -1,5 +1,3 @@
 APP_NAME_DEV = Upwind-dev
 APP_SUFFIX_DEV = .dev
-SENTRY_DSN_DEV = value
-SENTRY_ENVIRONMENT_DEV = development
 BASE_URL = http://127.0.0.1:8000

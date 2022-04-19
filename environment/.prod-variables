@@ -1,4 +1,3 @@
 APP_NAME_PROD = Upwind
 APP_SUFFIX_PROD = 
-SENTRY_DSN_PROD = value
-SENTRY_ENVIRONMENT_PROD = production
+BASE_URL = https://upwind-api.herokuapp.com

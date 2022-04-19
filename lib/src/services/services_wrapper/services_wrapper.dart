@@ -22,7 +22,7 @@ class ServicesWrapper extends StatelessWidget {
             router.replaceNamed(Routes.main.generatePath());
             break;
           case AuthenticationStatus.unauthenticated:
-            router.replaceNamed(Routes.welcome.generatePath());
+            router.replaceNamed(Routes.login.generatePath());
             break;
           default:
             break;

@@ -2,10 +2,9 @@ name: Lint and test PRs
 
 on:
   workflow_dispatch:
-# Uncomment lines below to enable lint, format and tests on each PR 
-#   pull_request:
-#     branches:
-#       - development
+  pull_request:
+    branches:
+      - development
 
 jobs:
   build:
