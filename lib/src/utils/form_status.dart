@@ -19,4 +19,6 @@ class SuccessFormStatus extends FormStatus {
   const SuccessFormStatus();
 }
 
-class ErrorFormStatus extends FormStatus {}
+class ErrorFormStatus extends FormStatus {
+  const ErrorFormStatus();
+}
