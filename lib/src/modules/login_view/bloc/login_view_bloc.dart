@@ -29,14 +29,20 @@ class LoginViewBloc extends Bloc<LoginViewEvent, LoginViewState> {
   }
 
   void _onEmailChanged(EmailChanged event, Emitter<LoginViewState> emit) {
-    emit(state.copyWith(email: event.email));
+    emit(state.copyWith(
+      email: event.email,
+      formStatus: const InitFormStatus(),
+    ));
   }
 
   void _onPasswordChanged(
     PasswordChanged event,
     Emitter<LoginViewState> emit,
   ) {
-    emit(state.copyWith(password: event.password));
+    emit(state.copyWith(
+      password: event.password,
+      formStatus: const InitFormStatus(),
+    ));
   }
 
   FutureOr<void> _onSabmitted(
@@ -47,12 +53,14 @@ class LoginViewBloc extends Bloc<LoginViewEvent, LoginViewState> {
       emit(state.copyWith(formStatus: const LoadingFormStatus()));
 
       try {
-        final tokens = await authenticationRepository.performLogIn(
-          email: state.email!,
-          password: state.password!,
-        );
+        // final tokens = await authenticationRepository.performLogIn(
+        //   email: state.email!,
+        //   password: state.password!,
+        // );
 
-        await tokensRepository.saveTokens(tokens);
+        // await tokensRepository.saveTokens(tokens);
+        await Future.delayed(const Duration(seconds: 1));
+        throw '1';
       } on DioError catch (e) {
         final error = e.response?.statusCode == StatusCode.UNAUTHORIZED
             ? LoginBlocError.invalidLoginData
