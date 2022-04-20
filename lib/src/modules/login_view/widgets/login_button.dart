@@ -28,7 +28,9 @@ class LoginButton extends StatelessWidget {
                       child: Text(
                         AppLocalizations.of(context)!.signIn,
                       ),
-                      onPressed: () {},
+                      onPressed: () => context
+                          .read<LoginViewBloc>()
+                          .add(const FormSubmitted()),
                     ),
                   )
                 : Container(),

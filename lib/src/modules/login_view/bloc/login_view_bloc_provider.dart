@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:upwind/src/modules/login_view/bloc/login_view_bloc.dart';
 import 'package:upwind/src/repositories/authentication_repository/authentication_repository.dart';
+import 'package:upwind/src/repositories/tokens_repository/tokens_repository.dart';
 
 class LogiViewBlocProvider extends StatelessWidget {
   final Widget? child;
@@ -15,6 +16,7 @@ class LogiViewBlocProvider extends StatelessWidget {
       child: BlocProvider<LoginViewBloc>(
         create: (context) => LoginViewBloc(
           authenticationRepository: context.read<IAuthenticationRepository>(),
+          tokensRepository: context.read<ITokensRepository>(),
         ),
         child: child,
       ),

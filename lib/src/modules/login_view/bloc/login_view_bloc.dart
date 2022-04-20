@@ -2,9 +2,13 @@ import 'dart:async';
 
 import 'package:autoequal/autoequal.dart';
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:http_status_code/http_status_code.dart';
+import 'package:upwind/src/config/api/exceptions.dart';
 import 'package:upwind/src/modules/login_view/utils/exceptions.dart';
 import 'package:upwind/src/repositories/authentication_repository/authentication_repository.dart';
+import 'package:upwind/src/repositories/tokens_repository/tokens_repository.dart';
 import 'package:upwind/src/utils/form_status.dart';
 
 part 'login_view_event.dart';
@@ -13,9 +17,11 @@ part 'login_view_bloc.g.dart';
 
 class LoginViewBloc extends Bloc<LoginViewEvent, LoginViewState> {
   final IAuthenticationRepository authenticationRepository;
+  final ITokensRepository tokensRepository;
 
   LoginViewBloc({
     required this.authenticationRepository,
+    required this.tokensRepository,
   }) : super(const LoginViewState()) {
     on<EmailChanged>(_onEmailChanged);
     on<PasswordChanged>(_onPasswordChanged);
@@ -41,11 +47,21 @@ class LoginViewBloc extends Bloc<LoginViewEvent, LoginViewState> {
       emit(state.copyWith(formStatus: const LoadingFormStatus()));
 
       try {
-        authenticationRepository.performLogIn(
+        final tokens = await authenticationRepository.performLogIn(
           email: state.email!,
           password: state.password!,
         );
-      } catch (e) {}
+
+        await tokensRepository.saveTokens(tokens);
+      } on DioError catch (e) {
+        final error = e.response?.statusCode == StatusCode.UNAUTHORIZED
+            ? LoginBlocError.invalidLoginData
+            : LoginBlocError.serverError;
+
+        throw _emitErrorState(error, emit, e);
+      } catch (e) {
+        throw _emitErrorState(LoginBlocError.serverError, emit, e);
+      }
     }
   }
 
