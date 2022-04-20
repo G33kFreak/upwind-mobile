@@ -1,10 +1,16 @@
 part of 'authentication_bloc.dart';
 
-abstract class AuthenticationState extends Equatable {
-  const AuthenticationState();
-  
-  @override
-  List<Object> get props => [];
-}
+@autoequalMixin
+class AuthenticationState extends Equatable
+    with _$AuthenticationStateAutoequalMixin {
+  final AuthenticationStatus status;
+  const AuthenticationState._({this.status = AuthenticationStatus.unknown});
 
-class AuthenticationInitial extends AuthenticationState {}
+  const AuthenticationState.unknown() : this._();
+
+  const AuthenticationState.unauthenticated()
+      : this._(status: AuthenticationStatus.unauthenticated);
+
+  const AuthenticationState.authenticated()
+      : this._(status: AuthenticationStatus.authenticated);
+}

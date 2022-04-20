@@ -1,6 +1,13 @@
 {
-  "appTitle": "template",
+  "appTitle": "upwind",
   "@appTitle": {
-    "description": "The title of the application"
-  }
+    "description": "Break your bad habits"
+  },
+  "email":"Email",
+  "password":"Password",
+  "signIn":"Sign in",
+  "signUp":"Sign up",
+  "invalidLoginData":"Incorrect email or password",
+  "serverError":"Server error",
+  "noError":"No error"
 }

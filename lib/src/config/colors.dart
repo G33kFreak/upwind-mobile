@@ -5,3 +5,4 @@ const Color purpleLight = Color(0xFF877AEC);
 const Color purpleDark = Color(0xFF6D60DB);
 const Color textGrey = Color(0xFF363636);
 const Color whiteGrey = Color(0xFFE8EAEF);
+const Color error = Color(0xFFA30B37);

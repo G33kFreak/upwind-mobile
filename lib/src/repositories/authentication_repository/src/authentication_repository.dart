@@ -19,13 +19,13 @@ class AuthenticationRepository implements IAuthenticationRepository {
   });
 
   @override
-  Future<void> performLogIn({
+  Future<Tokens> performLogIn({
     required String email,
     required String password,
   }) async {
     final response = await logIn(httpClient, email: email, password: password);
     try {
-      Tokens.fromJson(response.data);
+      return Tokens.fromJson(response.data);
     } catch (e) {
       throw ApiResponseParseException(e.toString());
     }
@@ -35,18 +35,5 @@ class AuthenticationRepository implements IAuthenticationRepository {
   Future<void> logOut() async {
     await tokensRepository.clearTokens();
     tokensRepository.controller?.add(AuthenticationStatus.unauthenticated);
-  }
-
-  @override
-  Future<void> performRefreshTokens({required String refreshToken}) async {
-    final response = await refreshTokens(
-      httpClient,
-      refreshToken: refreshToken,
-    );
-    try {
-      Tokens.fromJson(response.data);
-    } catch (e) {
-      throw ApiResponseParseException(e.toString());
-    }
   }
 }

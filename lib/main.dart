@@ -6,7 +6,7 @@ import 'package:sentry_flutter/sentry_flutter.dart' hide SentryClient;
 
 import 'src/app.dart';
 
-Future<void> main() => bootWithSentry();
+Future<void> main() => boot(); //bootWithSentry();
 
 Future<void> boot() async {
   await setupHive();
