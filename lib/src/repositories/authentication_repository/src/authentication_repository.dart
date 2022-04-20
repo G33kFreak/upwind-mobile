@@ -19,13 +19,13 @@ class AuthenticationRepository implements IAuthenticationRepository {
   });
 
   @override
-  Future<void> performLogIn({
+  Future<Tokens> performLogIn({
     required String email,
     required String password,
   }) async {
     final response = await logIn(httpClient, email: email, password: password);
     try {
-      Tokens.fromJson(response.data);
+      return Tokens.fromJson(response.data);
     } catch (e) {
       throw ApiResponseParseException(e.toString());
     }

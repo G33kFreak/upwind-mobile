@@ -15,8 +15,7 @@ jobs:
       
       - uses: subosito/flutter-action@v1
         with:
-          channel: 'stable' # 'dev', 'alpha', default to: 'stable'
-          # flutter-version: '1.12.x' # you can also specify exact version of flutter
+          channel: 'stable'
       
       - run: flutter pub get
       - run: make generate-code

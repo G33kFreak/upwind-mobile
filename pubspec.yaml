@@ -26,6 +26,8 @@ dependencies:
   http_status_code: ^0.0.2
   flutter_svg: ^1.0.3
   flutter_keyboard_visibility: ^5.2.0
+  mockito: ^5.1.0
+  bloc_test: ^9.0.3
 
 dev_dependencies:
   auto_route_generator: ^3.2.3
