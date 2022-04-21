@@ -1,10 +1,19 @@
 part of 'main_view_bloc.dart';
 
-abstract class MainViewState extends Equatable {
-  const MainViewState();
-
-  @override
-  List<Object> get props => [];
+enum MainViewMenuStatus {
+  hidden,
+  showed,
 }
 
-class MainViewInitial extends MainViewState {}
+@autoequalMixin
+class MainViewState extends Equatable with _$MainViewStateAutoequalMixin {
+  final MainViewMenuStatus menuStatus;
+
+  const MainViewState({
+    this.menuStatus = MainViewMenuStatus.hidden,
+  });
+
+  MainViewState copyWith({MainViewMenuStatus? menuStatus}) => MainViewState(
+        menuStatus: menuStatus ?? this.menuStatus,
+      );
+}

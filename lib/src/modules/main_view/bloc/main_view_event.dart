@@ -4,5 +4,11 @@ abstract class MainViewEvent extends Equatable {
   const MainViewEvent();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
+}
+
+@autoequalMixin
+class TurnMainViewMenu extends MainViewEvent
+    with _$TurnMainViewMenuAutoequalMixin {
+  const TurnMainViewMenu();
 }

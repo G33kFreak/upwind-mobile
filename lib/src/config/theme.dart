@@ -15,6 +15,12 @@ TextStyle _defaultTextStyle = const TextStyle(
   fontWeight: FontWeight.w600,
 );
 
+TextStyle _body1 = const TextStyle(
+  color: Colors.white,
+  fontSize: 16,
+  fontWeight: FontWeight.w600,
+);
+
 TextStyle _h1TextStyle = const TextStyle(
   fontSize: 36,
   fontWeight: FontWeight.w500,
@@ -23,11 +29,13 @@ TextStyle _h1TextStyle = const TextStyle(
 TextStyle _h2TextStyle = const TextStyle(
   fontSize: 32,
   fontWeight: FontWeight.w500,
+  color: whiteSnow,
 );
 
 TextStyle _h3TextStyle = const TextStyle(
-  fontSize: 24,
+  fontSize: 20,
   fontWeight: FontWeight.w500,
+  color: whiteSnow,
 );
 
 class AppTheme {
@@ -37,7 +45,8 @@ class AppTheme {
           headline1: _h1TextStyle,
           headline2: _h2TextStyle,
           headline3: _h3TextStyle,
-          bodyText1: _defaultTextStyle,
+          bodyText1: _body1,
+          bodyText2: _defaultTextStyle,
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
@@ -52,6 +61,9 @@ class AppTheme {
             primary: purpleLight,
             textStyle: _h3TextStyle,
           ),
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: purpleDark,
         ),
       );
 }
