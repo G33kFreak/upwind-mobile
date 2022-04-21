@@ -59,31 +59,4 @@ void main() {
       AuthenticationState.unauthenticated(),
     ],
   );
-
-  blocTest<AuthenticationBloc, AuthenticationState>(
-    'Status is unauthenticated when performRefreshTokens throws error',
-    setUp: () {
-      when(tokensRepository.status).thenAnswer(
-        (_) => Stream.fromIterable([
-          AuthenticationStatus.unknown,
-          AuthenticationStatus.authenticated,
-        ]),
-      );
-      when(tokensRepository.getTokens())
-          .thenAnswer((_) => Future.value(tokens));
-      when(tokensRepository.performRefreshTokens(
-        httpClient,
-        refreshToken: anyNamed('refreshToken'),
-      )).thenThrow(MockDioError());
-      when(tokensRepository.clearTokens()).thenAnswer((_) => Future.value());
-    },
-    build: () => AuthenticationBloc(
-      tokensRepository: tokensRepository,
-      httpClient: httpClient,
-    ),
-    expect: () => const <AuthenticationState>[
-      AuthenticationState.unknown(),
-      AuthenticationState.unauthenticated(),
-    ],
-  );
 }
