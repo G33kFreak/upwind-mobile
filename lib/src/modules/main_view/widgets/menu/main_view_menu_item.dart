@@ -37,6 +37,7 @@ class MainViewMenuItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(icon, size: 32, color: whiteSnow),
+              const SizedBox(height: 8),
               Text(
                 title,
                 style: Theme.of(context).textTheme.headline3,

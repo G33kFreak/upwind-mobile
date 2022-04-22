@@ -38,6 +38,12 @@ TextStyle _h3TextStyle = const TextStyle(
   color: whiteSnow,
 );
 
+TextStyle _h4TextStyle = const TextStyle(
+  fontSize: 24,
+  fontWeight: FontWeight.w500,
+  color: purpleDark,
+);
+
 class AppTheme {
   static ThemeData get mainTheme => ThemeData(
         backgroundColor: whiteSnow,
@@ -45,8 +51,12 @@ class AppTheme {
           headline1: _h1TextStyle,
           headline2: _h2TextStyle,
           headline3: _h3TextStyle,
+          headline4: _h4TextStyle,
           bodyText1: _body1,
           bodyText2: _defaultTextStyle,
+        ),
+        colorScheme: ColorScheme.fromSwatch().copyWith(
+          primary: purpleDark,
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(

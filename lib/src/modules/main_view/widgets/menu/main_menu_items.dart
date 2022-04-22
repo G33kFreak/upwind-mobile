@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upwind/src/modules/main_view/bloc/main_view_bloc.dart';
-import 'package:upwind/src/modules/main_view/widgets/main_view_menu_item.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:upwind/src/modules/main_view/widgets/menu/main_view_menu_item.dart';
 
 class MainMenuItems extends StatefulWidget {
   const MainMenuItems({Key? key}) : super(key: key);

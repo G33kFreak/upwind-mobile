@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:upwind/src/modules/main_view/utils/main_view_utils.dart';
-import 'package:upwind/src/modules/main_view/widgets/main_view_calendar_item.dart';
+import 'package:upwind/src/modules/main_view/widgets/calendar/main_view_calendar_item.dart';
 
 class MainViewCalendarList extends StatelessWidget {
   MainViewCalendarList({Key? key}) : super(key: key);

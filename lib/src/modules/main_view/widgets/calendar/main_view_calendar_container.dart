@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:upwind/src/modules/main_view/widgets/main_view_calendar_list.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:upwind/src/modules/main_view/widgets/calendar/main_view_calendar_list.dart';
 
 class MainViewCalendarContainer extends StatelessWidget {
   const MainViewCalendarContainer({Key? key}) : super(key: key);

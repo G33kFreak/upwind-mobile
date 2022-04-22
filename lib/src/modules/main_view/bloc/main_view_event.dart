@@ -12,3 +12,8 @@ class TurnMainViewMenu extends MainViewEvent
     with _$TurnMainViewMenuAutoequalMixin {
   const TurnMainViewMenu();
 }
+
+@autoequalMixin
+class LoadHabits extends MainViewEvent with _$LoadHabitsAutoequalMixin {
+  const LoadHabits();
+}

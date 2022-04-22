@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upwind/src/config/colors.dart';
 import 'package:upwind/src/modules/main_view/bloc/main_view_bloc.dart';
-import 'package:upwind/src/modules/main_view/widgets/main_menu_items.dart';
+import 'package:upwind/src/modules/main_view/widgets/menu/main_menu_items.dart';
 
 class MainViewMenu extends StatelessWidget {
   const MainViewMenu({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class MainViewMenu extends StatelessWidget {
                 color: whiteSnow.withOpacity(0.5),
                 child: const SafeArea(
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 90, right: 20),
+                    padding: EdgeInsets.only(bottom: 90, right: 20),
                     child: MainMenuItems(),
                   ),
                 ),
