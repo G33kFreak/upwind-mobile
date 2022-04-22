@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:upwind/src/config/colors.dart';
+import 'package:upwind/src/modules/main_view/widgets/habit_card/habit_card_content.dart';
 import 'package:upwind/src/modules/main_view/widgets/habit_card/habit_progress_indicator.dart';
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
 
@@ -34,10 +35,7 @@ class HabitListItemCard extends StatelessWidget {
                 timeStart: habit.startDate,
               ),
               const Spacer(),
-              Expanded(
-                flex: 4,
-                child: Container(),
-              )
+              HabitCardContent(habit: habit),
             ],
           ),
         ),

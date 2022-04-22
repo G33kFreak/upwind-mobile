@@ -3,9 +3,8 @@ import 'dart:io';
 import 'package:intl/intl.dart';
 
 class MainViewUtils {
-  static List<DateTime> getDatesOfWeek() {
-    final today = DateTime.now();
-    final firstDayOfWeek = today.subtract(Duration(days: today.weekday - 1));
+  static List<DateTime> getDatesOfWeek(DateTime date) {
+    final firstDayOfWeek = date.subtract(Duration(days: date.weekday - 1));
     return List.generate(
       7,
       (index) => firstDayOfWeek.add(Duration(days: index)),

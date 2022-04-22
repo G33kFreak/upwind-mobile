@@ -5,7 +5,7 @@ import 'package:upwind/src/modules/main_view/widgets/calendar/main_view_calendar
 class MainViewCalendarList extends StatelessWidget {
   MainViewCalendarList({Key? key}) : super(key: key);
 
-  final datesOfWeek = MainViewUtils.getDatesOfWeek();
+  final datesOfWeek = MainViewUtils.getDatesOfWeek(DateTime.now());
 
   List<Widget> _generateItems() {
     return List.generate(

@@ -3,16 +3,18 @@
   "@appTitle": {
     "description": "Break your bad habits"
   },
-  "email":"Email",
-  "password":"Password",
-  "signIn":"Sign in",
-  "signUp":"Sign up",
-  "invalidLoginData":"Incorrect email or password",
-  "serverError":"Server error",
-  "noError":"No error",
-  "todayIs":"Today is",
-  "showRaport":"Show raport",
-  "newRelapse":"New relapse",
-  "newHabit":"New habit",
-  "days":"Days"
+  "email": "Email",
+  "password": "Password",
+  "signIn": "Sign in",
+  "signUp": "Sign up",
+  "invalidLoginData": "Incorrect email or password",
+  "serverError": "Server error",
+  "noError": "No error",
+  "todayIs": "Today is",
+  "showRaport": "Show raport",
+  "newRelapse": "New relapse",
+  "newHabit": "New habit",
+  "days": "Days",
+  "timeSaved": "Time saved",
+  "moneySaved": "Money saved"
 }
