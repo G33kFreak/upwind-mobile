@@ -44,7 +44,7 @@ class _HabitsListAnimationManagerState
       widget.listKey.currentState?.insertItem(index);
     });
 
-    _findIndexDifferences(oldHabits, newHabits).reversed.forEach((index) {
+    _findIndexDifferences(oldHabits, newHabits).forEach((index) {
       final habit = oldHabits[index];
 
       widget.listKey.currentState?.removeItem(

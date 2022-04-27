@@ -5,10 +5,12 @@ import 'package:upwind/src/repositories/habits_repository/habits_repository.dart
 class HabitsRepository implements IHabitsRepository {
   final Dio authHttpClient;
   final GetHabitsList getHabitsList;
+  final DeleteHabitItem deleteHabitItem;
 
   const HabitsRepository({
     required this.authHttpClient,
     required this.getHabitsList,
+    required this.deleteHabitItem,
   });
 
   @override
@@ -28,4 +30,10 @@ class HabitsRepository implements IHabitsRepository {
     // TODO: implement getHabitsDetails
     throw UnimplementedError();
   }
+
+  @override
+  Future<void> deleteHabit(int id) async => await deleteHabitItem(
+        authHttpClient,
+        habitId: id,
+      );
 }

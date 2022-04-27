@@ -17,3 +17,10 @@ class TurnMainViewMenu extends MainViewEvent
 class LoadHabits extends MainViewEvent with _$LoadHabitsAutoequalMixin {
   const LoadHabits();
 }
+
+@autoequalMixin
+class DeleteHabit extends MainViewEvent with _$DeleteHabitAutoequalMixin {
+  final int habitId;
+
+  const DeleteHabit({required this.habitId});
+}

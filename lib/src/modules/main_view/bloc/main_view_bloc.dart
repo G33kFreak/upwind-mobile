@@ -19,6 +19,7 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
   }) : super(const MainViewState()) {
     on<TurnMainViewMenu>(_onMenuTurned);
     on<LoadHabits>(_onLoadHabits);
+    on<DeleteHabit>(_onDeleteHabit);
   }
 
   void _onMenuTurned(TurnMainViewMenu event, Emitter<MainViewState> emit) {
@@ -41,6 +42,33 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
         habits: habits,
       ));
     } on DioError catch (e) {
+      throw _emitErrorState(
+        MainViewBlocError.serverError,
+        emit,
+        convertDioErrorToLogMessage(e),
+      );
+    }
+  }
+
+  Future<void> _onDeleteHabit(
+    DeleteHabit event,
+    Emitter<MainViewState> emit,
+  ) async {
+    // We remove item from UI immediately after event is sent
+    // after that, we send a request to BE. If it throws some exception
+    // we return removed item back to UI and show error
+
+    //TODO: Add some error snackbar
+    final oldHabits = state.habits;
+    final newHabits = List<HabitListItem>.from(state.habits)
+      ..removeWhere((habit) => habit.id == event.habitId);
+
+    emit(state.copyWith(habits: newHabits));
+
+    try {
+      await habitsRepository.deleteHabit(event.habitId);
+    } on DioError catch (e) {
+      emit(state.copyWith(habits: oldHabits));
       throw _emitErrorState(
         MainViewBlocError.serverError,
         emit,

@@ -17,6 +17,7 @@ class MainViewBlocProvider extends StatelessWidget {
           habitsRepository: HabitsRepository(
             authHttpClient: context.read<ApiProvider>().authenticatedHttpClient,
             getHabitsList: getHabitsList,
+            deleteHabitItem: deleteHabitItem,
           ),
         );
 
