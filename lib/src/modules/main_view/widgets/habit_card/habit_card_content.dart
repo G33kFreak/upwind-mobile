@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:upwind/src/config/colors.dart';
+import 'package:upwind/src/modules/main_view/widgets/habit_card/saved_value_container.dart';
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HabitCardContent extends StatelessWidget {
   final HabitListItem habit;
@@ -27,8 +29,26 @@ class HabitCardContent extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Time saved', style: Theme.of(context).textTheme.bodyText2),
-              Text('Money saved', style: Theme.of(context).textTheme.bodyText2),
+              Column(
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.timeSaved,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  const SizedBox(height: 8),
+                  SavedValueContainer(valueText: '${habit.savedTime} hr.')
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.moneySaved,
+                    style: Theme.of(context).textTheme.bodyText2,
+                  ),
+                  const SizedBox(height: 8),
+                  SavedValueContainer(valueText: '${habit.savedMoney}\$')
+                ],
+              ),
             ],
           )
         ],

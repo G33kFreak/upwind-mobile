@@ -44,6 +44,12 @@ TextStyle _h4TextStyle = const TextStyle(
   color: purpleDark,
 );
 
+TextStyle _subtitle1 = const TextStyle(
+  fontSize: 12,
+  fontWeight: FontWeight.w600,
+  color: whiteSnow,
+);
+
 class AppTheme {
   static ThemeData get mainTheme => ThemeData(
         backgroundColor: whiteSnow,
@@ -54,6 +60,7 @@ class AppTheme {
           headline4: _h4TextStyle,
           bodyText1: _body1,
           bodyText2: _defaultTextStyle,
+          subtitle1: _subtitle1,
         ),
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: purpleDark,
