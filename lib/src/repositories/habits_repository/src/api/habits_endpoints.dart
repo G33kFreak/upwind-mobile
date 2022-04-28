@@ -7,12 +7,12 @@ final GetHabitsList getHabitsList = (Dio httpClient) => httpClient.get(
     );
 
 typedef DeleteHabitItem = Future<Response> Function(
-  Dio, {
-  required int habitId,
-});
+  Dio,
+  int,
+);
 
 final DeleteHabitItem deleteHabitItem = (
-  Dio httpClient, {
-  required int habitId,
-}) =>
+  Dio httpClient,
+  int habitId,
+) =>
     httpClient.delete('/api/habit/$habitId/');

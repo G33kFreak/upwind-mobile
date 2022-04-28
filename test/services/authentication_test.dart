@@ -13,7 +13,7 @@ void main() {
   final httpClient = MockDio();
   final tokens = MockTokens();
   blocTest<AuthenticationBloc, AuthenticationState>(
-    'Status is authenticated when tokens != null',
+    'AuthenticationService status is authenticated when tokens != null',
     setUp: () {
       when(tokensRepository.status).thenAnswer(
         (_) => Stream.fromIterable([
@@ -40,7 +40,7 @@ void main() {
   );
 
   blocTest<AuthenticationBloc, AuthenticationState>(
-    'Status is unauthenticated when tokens == null',
+    'AuthenticationService status is unauthenticated when tokens == null',
     setUp: () {
       when(tokensRepository.status).thenAnswer(
         (_) => Stream.fromIterable([

@@ -32,8 +32,8 @@ class HabitsRepository implements IHabitsRepository {
   }
 
   @override
-  Future<void> deleteHabit(int id) async => await deleteHabitItem(
+  Future<void> deleteHabit({required int id}) async => await deleteHabitItem(
         authHttpClient,
-        habitId: id,
+        id,
       );
 }

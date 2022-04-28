@@ -66,7 +66,7 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
     emit(state.copyWith(habits: newHabits));
 
     try {
-      await habitsRepository.deleteHabit(event.habitId);
+      await habitsRepository.deleteHabit(id: event.habitId);
     } on DioError catch (e) {
       emit(state.copyWith(habits: oldHabits));
       throw _emitErrorState(

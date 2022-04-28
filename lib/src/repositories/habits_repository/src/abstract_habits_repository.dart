@@ -6,5 +6,5 @@ abstract class IHabitsRepository {
 
   Future<HabitDetails> getHabitsDetails();
 
-  Future<void> deleteHabit(int id);
+  Future<void> deleteHabit({required int id});
 }
