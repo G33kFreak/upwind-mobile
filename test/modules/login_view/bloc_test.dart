@@ -22,7 +22,7 @@ void main() {
   final tokensReposiotry = MockITokensRepository();
 
   blocTest<LoginViewBloc, LoginViewState>(
-    'Password and email change properly',
+    'LoginView password and email changing ok',
     build: () => LoginViewBloc(
       authenticationRepository: authenticationRepository,
       tokensRepository: tokensReposiotry,
@@ -41,7 +41,7 @@ void main() {
   );
 
   blocTest<LoginViewBloc, LoginViewState>(
-    'Success logging in process ends',
+    'LoginView logging in ok',
     setUp: () {
       when(authenticationRepository.performLogIn(
         email: anyNamed('email'),
@@ -75,7 +75,7 @@ void main() {
         statusCode: StatusCode.METHOD_FAILURE,
       ));
   blocTest<LoginViewBloc, LoginViewState>(
-    'serverError when DioError is not with 401 status code',
+    'LoginView serverError when DioError is not with 401 status code',
     setUp: () {
       when(authenticationRepository.performLogIn(
         email: anyNamed('email'),
@@ -119,7 +119,7 @@ void main() {
         statusCode: StatusCode.UNAUTHORIZED,
       ));
   blocTest<LoginViewBloc, LoginViewState>(
-    'invalidLoginData error when Dio error with 401 status code',
+    'LoginView invalidLoginData error when Dio error with 401 status code',
     setUp: () {
       when(authenticationRepository.performLogIn(
         email: anyNamed('email'),
@@ -157,7 +157,7 @@ void main() {
   );
 
   blocTest<LoginViewBloc, LoginViewState>(
-    'Form status resets after getting error and changing input data',
+    'LoginView form status resets after getting error and changing input data',
     setUp: () {
       when(authenticationRepository.performLogIn(
         email: anyNamed('email'),

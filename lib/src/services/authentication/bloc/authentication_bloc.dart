@@ -43,16 +43,7 @@ class AuthenticationBloc
         {
           final tokens = await tokensRepository.getTokens();
           if (tokens != null) {
-            try {
-              await tokensRepository.performRefreshTokens(
-                httpClient,
-                refreshToken: tokens.refreshToken,
-              );
-              return emit(const AuthenticationState.authenticated());
-            } catch (_) {
-              await tokensRepository.clearTokens();
-              return emit(const AuthenticationState.unauthenticated());
-            }
+            return emit(const AuthenticationState.authenticated());
           } else {
             return emit(const AuthenticationState.unauthenticated());
           }

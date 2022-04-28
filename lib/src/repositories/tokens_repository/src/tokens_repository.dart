@@ -47,7 +47,7 @@ class TokensRepository
 
   @override
   Future<void> saveTokens(Tokens tokens) async {
-    (await box).put(tokensKey, tokens);
+    await (await box).put(tokensKey, tokens);
     controller?.add(AuthenticationStatus.authenticated);
   }
 

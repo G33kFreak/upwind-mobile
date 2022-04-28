@@ -13,7 +13,7 @@ void main() {
   final httpClient = MockDio();
   final tokens = MockTokens();
   blocTest<AuthenticationBloc, AuthenticationState>(
-    'Status is authenticated when tokens != null',
+    'AuthenticationService status is authenticated when tokens != null',
     setUp: () {
       when(tokensRepository.status).thenAnswer(
         (_) => Stream.fromIterable([
@@ -40,7 +40,7 @@ void main() {
   );
 
   blocTest<AuthenticationBloc, AuthenticationState>(
-    'Status is unauthenticated when tokens == null',
+    'AuthenticationService status is unauthenticated when tokens == null',
     setUp: () {
       when(tokensRepository.status).thenAnswer(
         (_) => Stream.fromIterable([
@@ -49,33 +49,6 @@ void main() {
         ]),
       );
       when(tokensRepository.getTokens()).thenAnswer((_) => Future.value(null));
-    },
-    build: () => AuthenticationBloc(
-      tokensRepository: tokensRepository,
-      httpClient: httpClient,
-    ),
-    expect: () => const <AuthenticationState>[
-      AuthenticationState.unknown(),
-      AuthenticationState.unauthenticated(),
-    ],
-  );
-
-  blocTest<AuthenticationBloc, AuthenticationState>(
-    'Status is unauthenticated when performRefreshTokens throws error',
-    setUp: () {
-      when(tokensRepository.status).thenAnswer(
-        (_) => Stream.fromIterable([
-          AuthenticationStatus.unknown,
-          AuthenticationStatus.authenticated,
-        ]),
-      );
-      when(tokensRepository.getTokens())
-          .thenAnswer((_) => Future.value(tokens));
-      when(tokensRepository.performRefreshTokens(
-        httpClient,
-        refreshToken: anyNamed('refreshToken'),
-      )).thenThrow(MockDioError());
-      when(tokensRepository.clearTokens()).thenAnswer((_) => Future.value());
     },
     build: () => AuthenticationBloc(
       tokensRepository: tokensRepository,
