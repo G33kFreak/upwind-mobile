@@ -16,5 +16,7 @@
   "newHabit": "New habit",
   "days": "Days",
   "timeSaved": "Time saved",
-  "moneySaved": "Money saved"
+  "moneySaved": "Money saved",
+  "noConnection":"No internet connection",
+  "checkYourConnection":"Prease check your internet connection"
 }
