@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:upwind/src/modules/habit_details/widgets/relapses_list/relapse_list_card.dart';
 import 'package:upwind/src/repositories/relapses_repository/src/models/relapse.dart';
 import 'package:upwind/src/widgets/list_animation_manager.dart';
 import 'package:upwind/src/widgets/list_element_transition.dart';
@@ -22,7 +23,9 @@ class RelapsesListAnimationManager extends StatelessWidget {
       items: relapses,
       listItemBuilder: (context, animation, relapse) => ListElementTransition(
         animation: animation,
-        child: Text(relapse.reason),
+        child: RelapseListCard(
+          relapse: relapse,
+        ),
       ),
       child: child,
     );

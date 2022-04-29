@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upwind/src/modules/habit_details/bloc/habit_details_bloc.dart';
+import 'package:upwind/src/modules/habit_details/widgets/relapses_list/relapse_list_card.dart';
 import 'package:upwind/src/modules/habit_details/widgets/relapses_list/relapses_list_animation_manager.dart';
 import 'package:upwind/src/utils/form_status.dart';
 import 'package:upwind/src/widgets/animated_loading_indicator.dart';
@@ -32,14 +33,16 @@ class HabitRelapsesList extends StatelessWidget {
                 primary: false,
                 physics: const NeverScrollableScrollPhysics(),
                 key: _listKey,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 initialItemCount: state.habitDetails?.relapses.length ?? 0,
-                itemBuilder: ((context, index, animation) =>
-                    ListElementTransition(
-                      animation: animation,
-                      child: Text(
-                        state.habitDetails?.relapses[index].reason ?? '',
-                      ),
-                    )),
+                itemBuilder: ((context, index, animation) {
+                  final relapse = state.habitDetails!.relapses[index];
+
+                  return ListElementTransition(
+                    animation: animation,
+                    child: RelapseListCard(relapse: relapse),
+                  );
+                }),
               )
             ],
           ),
