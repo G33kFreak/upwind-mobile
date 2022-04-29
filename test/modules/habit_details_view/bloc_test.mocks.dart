@@ -153,3 +153,24 @@ class MockHabitDetails extends _i1.Mock implements _i3.HabitDetails {
       (super.noSuchMethod(Invocation.method(#toJson, []),
           returnValue: <String, dynamic>{}) as Map<String, dynamic>);
 }
+
+/// A class which mocks [Relapse].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRelapse extends _i1.Mock implements _i5.Relapse {
+  MockRelapse() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  DateTime get dateTime => (super.noSuchMethod(Invocation.getter(#dateTime),
+      returnValue: _FakeDateTime_3()) as DateTime);
+  @override
+  String get reason =>
+      (super.noSuchMethod(Invocation.getter(#reason), returnValue: '')
+          as String);
+  @override
+  Map<String, dynamic> toJson() =>
+      (super.noSuchMethod(Invocation.method(#toJson, []),
+          returnValue: <String, dynamic>{}) as Map<String, dynamic>);
+}
