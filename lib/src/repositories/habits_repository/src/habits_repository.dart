@@ -6,11 +6,13 @@ class HabitsRepository implements IHabitsRepository {
   final Dio authHttpClient;
   final GetHabitsList getHabitsList;
   final DeleteHabitItem deleteHabitItem;
+  final GetHabitDetails getHabitDetails;
 
   const HabitsRepository({
     required this.authHttpClient,
     required this.getHabitsList,
     required this.deleteHabitItem,
+    required this.getHabitDetails,
   });
 
   @override
@@ -26,9 +28,13 @@ class HabitsRepository implements IHabitsRepository {
   }
 
   @override
-  Future<HabitDetails> getHabitsDetails() {
-    // TODO: implement getHabitsDetails
-    throw UnimplementedError();
+  Future<HabitDetails> getHabitsDetails({required int id}) async {
+    final response = await getHabitDetails(authHttpClient, id);
+    try {
+      return HabitDetails.fromJson(response.data);
+    } catch (e) {
+      throw ApiResponseParseException(e.toString());
+    }
   }
 
   @override

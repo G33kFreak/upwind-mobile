@@ -2,8 +2,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'relapse.g.dart';
 
-@JsonSerializable(fieldRename: FieldRename.snake)
+@JsonSerializable()
 class Relapse {
+  @JsonKey(name: 'datetime')
   final DateTime dateTime;
   final String reason;
 
