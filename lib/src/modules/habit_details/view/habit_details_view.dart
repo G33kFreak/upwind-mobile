@@ -6,6 +6,7 @@ import 'package:upwind/src/config/colors.dart';
 import 'package:upwind/src/modules/habit_details/bloc/habit_details_bloc_provider.dart';
 import 'package:upwind/src/modules/habit_details/widgets/habit_list_item_data.dart';
 import 'package:upwind/src/modules/habit_details/widgets/relapses_list/habit_relapses_list.dart';
+import 'package:upwind/src/modules/habit_details/widgets/relapses_title_and_button.dart';
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -41,10 +42,7 @@ class HabitDetailsView extends StatelessWidget implements AutoRouteWrapper {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Text(
-                    AppLocalizations.of(context)!.relapses,
-                    style: Theme.of(context).textTheme.headline6,
-                  ),
+                  const RelapsesTitleAndButton(),
                   HabitRelapsesList(),
                 ],
               ),
