@@ -9,7 +9,7 @@ final PostAddRelapse postAddRelapse = (
 ) =>
     httpClient.post(
       '/api/relapses/',
-      queryParameters: {
+      data: {
         "habit": habitId,
         "reason": reason,
       },

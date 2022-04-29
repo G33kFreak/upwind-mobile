@@ -14,3 +14,11 @@ class LoadHabitDetails extends HabitDetailsEvent
 
   const LoadHabitDetails({required this.habitId});
 }
+
+@autoequalMixin
+class AddRelapseToHabit extends HabitDetailsEvent
+    with _$AddRelapseToHabitAutoequalMixin {
+  final String reason;
+
+  const AddRelapseToHabit({required this.reason});
+}

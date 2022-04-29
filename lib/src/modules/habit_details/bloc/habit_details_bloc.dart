@@ -19,6 +19,7 @@ class HabitDetailsBloc extends Bloc<HabitDetailsEvent, HabitDetailsState> {
     required this.relapsesRepository,
   }) : super(const HabitDetailsState()) {
     on<LoadHabitDetails>(_onLoadDetails);
+    on<AddRelapseToHabit>(_onAddRelapse);
   }
 
   Future<void> _onLoadDetails(
@@ -34,6 +35,22 @@ class HabitDetailsBloc extends Bloc<HabitDetailsEvent, HabitDetailsState> {
         habitDetails: habitDetails,
         relapsesLoadingStatus: const SuccessFormStatus(),
       ));
+    } on DioError catch (e) {
+      print(e);
+    }
+  }
+
+  Future<void> _onAddRelapse(
+    AddRelapseToHabit event,
+    Emitter<HabitDetailsState> emit,
+  ) async {
+    emit(state.copyWith(relapsesLoadingStatus: const LoadingFormStatus()));
+    try {
+      await relapsesRepository.createRelapse(
+        habitId: state.habitDetails!.id,
+        reason: event.reason,
+      );
+      add(LoadHabitDetails(habitId: state.habitDetails!.id));
     } on DioError catch (e) {
       print(e);
     }
