@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
           theme: AppTheme.mainTheme,
           builder: (context, child) => ServicesWrapper(
             router: _router,
-            child: child,
+            child: child!,
           ),
         ),
       );

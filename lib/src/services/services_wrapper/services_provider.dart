@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upwind/src/config/api/clients.dart';
 import 'package:upwind/src/repositories/authentication_repository/authentication_repository.dart';
+import 'package:upwind/src/repositories/connection_repository/connection_repository.dart';
 import 'package:upwind/src/repositories/tokens_repository/src/abstract_tokens_repository.dart';
 import 'package:upwind/src/repositories/tokens_repository/src/tokens_repository.dart';
 import 'package:upwind/src/services/authentication/bloc/authentication_bloc.dart';
+import 'package:upwind/src/services/connection/bloc/connection_bloc.dart';
 
 class ServicesProvider extends StatelessWidget {
   final Widget child;
@@ -33,13 +35,24 @@ class ServicesProvider extends StatelessWidget {
             logIn: logIn,
             refreshTokens: refreshTokens,
           ),
-        )
-      ],
-      child: BlocProvider<AuthenticationBloc>(
-        create: (context) => AuthenticationBloc(
-          tokensRepository: context.read<ITokensRepository>(),
-          httpClient: context.read<ApiProvider>().httpClient,
         ),
+        RepositoryProvider<ConnectionRepository>(
+          create: (context) => ConnectionRepository(),
+        ),
+      ],
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AuthenticationBloc>(
+            create: (context) => AuthenticationBloc(
+              tokensRepository: context.read<ITokensRepository>(),
+              httpClient: context.read<ApiProvider>().httpClient,
+            ),
+          ),
+          BlocProvider<ConnectionBloc>(
+            create: (context) => ConnectionBloc(
+                connectionRepository: context.read<ConnectionRepository>()),
+          ),
+        ],
         child: child,
       ),
     );
