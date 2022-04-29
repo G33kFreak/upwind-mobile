@@ -4,6 +4,8 @@ import 'package:upwind/src/config/api/clients.dart';
 import 'package:upwind/src/modules/habit_details/bloc/habit_details_bloc.dart';
 import 'package:upwind/src/modules/habit_details/view/habit_details_view.dart';
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
+import 'package:upwind/src/repositories/relapses_repository/relapses_repository.dart';
+import 'package:upwind/src/repositories/relapses_repository/src/api/relapses_endpoints.dart';
 
 class HabitDetailsBlocProvider extends StatelessWidget {
   final Widget child;
@@ -23,6 +25,10 @@ class HabitDetailsBlocProvider extends StatelessWidget {
             getHabitDetails: getHabitDetails,
             getHabitsList: getHabitsList,
             deleteHabitItem: deleteHabitItem,
+          ),
+          relapsesRepository: RelapsesRepository(
+            authHttpClient: context.read<ApiProvider>().authenticatedHttpClient,
+            postAddRelapse: postAddRelapse,
           ),
         );
         final habitId = HabitDetailsView.getProvidedHabit(context).id;

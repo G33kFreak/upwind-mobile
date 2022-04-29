@@ -3,6 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
+import 'package:upwind/src/repositories/relapses_repository/relapses_repository.dart';
 import 'package:upwind/src/utils/form_status.dart';
 
 part 'habit_details_event.dart';
@@ -11,9 +12,12 @@ part 'habit_details_bloc.g.dart';
 
 class HabitDetailsBloc extends Bloc<HabitDetailsEvent, HabitDetailsState> {
   final HabitsRepository habitsRepository;
+  final IRelapsesRepository relapsesRepository;
 
-  HabitDetailsBloc({required this.habitsRepository})
-      : super(const HabitDetailsState()) {
+  HabitDetailsBloc({
+    required this.habitsRepository,
+    required this.relapsesRepository,
+  }) : super(const HabitDetailsState()) {
     on<LoadHabitDetails>(_onLoadDetails);
   }
 
