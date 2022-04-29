@@ -35,8 +35,9 @@ class HabitDetailsBloc extends Bloc<HabitDetailsEvent, HabitDetailsState> {
         habitDetails: habitDetails,
         relapsesLoadingStatus: const SuccessFormStatus(),
       ));
-    } on DioError catch (e) {
-      print(e);
+      //TODO: Implement error state
+    } on DioError catch (_) {
+      rethrow;
     }
   }
 
@@ -51,8 +52,9 @@ class HabitDetailsBloc extends Bloc<HabitDetailsEvent, HabitDetailsState> {
         reason: event.reason,
       );
       add(LoadHabitDetails(habitId: state.habitDetails!.id));
-    } on DioError catch (e) {
-      print(e);
+      //TODO: Implement error state
+    } on DioError catch (_) {
+      rethrow;
     }
   }
 }
