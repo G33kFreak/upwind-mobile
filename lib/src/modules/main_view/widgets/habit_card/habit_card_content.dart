@@ -19,35 +19,44 @@ class HabitCardContent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Text(
-            habit.name,
-            style: Theme.of(context)
-                .textTheme
-                .headline3
-                ?.copyWith(color: textGrey),
+          Hero(
+            tag: 'habit-card-title-${habit.id}',
+            child: Text(
+              habit.name,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline3
+                  ?.copyWith(color: textGrey),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Column(
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.timeSaved,
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                  const SizedBox(height: 8),
-                  SavedValueContainer(valueText: '${habit.savedTime} hr.')
-                ],
+              Hero(
+                tag: 'habit-card-saved-time-${habit.id}',
+                child: Column(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.timeSaved,
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                    const SizedBox(height: 8),
+                    SavedValueContainer(valueText: '${habit.savedTime} hr.')
+                  ],
+                ),
               ),
-              Column(
-                children: [
-                  Text(
-                    AppLocalizations.of(context)!.moneySaved,
-                    style: Theme.of(context).textTheme.bodyText2,
-                  ),
-                  const SizedBox(height: 8),
-                  SavedValueContainer(valueText: '${habit.savedMoney}\$')
-                ],
+              Hero(
+                tag: 'habit-card-saved-money-${habit.id}',
+                child: Column(
+                  children: [
+                    Text(
+                      AppLocalizations.of(context)!.moneySaved,
+                      style: Theme.of(context).textTheme.bodyText2,
+                    ),
+                    const SizedBox(height: 8),
+                    SavedValueContainer(valueText: '${habit.savedMoney}\$')
+                  ],
+                ),
               ),
             ],
           )

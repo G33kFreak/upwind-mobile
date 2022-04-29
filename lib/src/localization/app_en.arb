@@ -18,5 +18,7 @@
   "timeSaved": "Time saved",
   "moneySaved": "Money saved",
   "noConnection":"No internet connection",
-  "checkYourConnection":"Prease check your internet connection"
+  "checkYourConnection":"Prease check your internet connection",
+  "generateHabitsReport":"Generate report for habit",
+  "relapses":"Relapses"
 }

@@ -4,9 +4,9 @@ import 'package:upwind/src/config/colors.dart';
 import 'package:upwind/src/modules/main_view/bloc/main_view_bloc.dart';
 import 'package:upwind/src/modules/main_view/widgets/habit_card/habit_list_item_card.dart';
 import 'package:upwind/src/modules/main_view/widgets/habits_list/habits_list_animation_manager.dart';
-import 'package:upwind/src/modules/main_view/widgets/habits_list/list_element_transition.dart';
 import 'package:upwind/src/utils/form_status.dart';
 import 'package:upwind/src/widgets/animated_loading_indicator.dart';
+import 'package:upwind/src/widgets/list_element_transition.dart';
 
 class MainViewHabitsList extends StatelessWidget {
   MainViewHabitsList({Key? key}) : super(key: key);
@@ -46,7 +46,7 @@ class MainViewHabitsList extends StatelessWidget {
                         child: HabitListItemCard(habit: state.habits[index]),
                       );
                     },
-                  )
+                  ),
                 ],
               ),
             ),
