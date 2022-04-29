@@ -16,23 +16,20 @@ class HabitProgressIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      flex: 2,
-      child: CircularPercentIndicator(
-        radius: 48,
-        lineWidth: 8,
-        percent: MainViewUtils.getProgressValueByTime(
-          timeStart,
-          DateTime.now(),
-        ),
-        backgroundColor: purpleDark.withOpacity(0.35),
-        progressColor: purpleDark,
-        circularStrokeCap: CircularStrokeCap.round,
-        center: Text(
-          '${days.toString()}\n${AppLocalizations.of(context)!.days}',
-          style: Theme.of(context).textTheme.headline4,
-          textAlign: TextAlign.center,
-        ),
+    return CircularPercentIndicator(
+      radius: 48,
+      lineWidth: 8,
+      percent: MainViewUtils.getProgressValueByTime(
+        timeStart,
+        DateTime.now(),
+      ),
+      backgroundColor: purpleDark.withOpacity(0.35),
+      progressColor: purpleDark,
+      circularStrokeCap: CircularStrokeCap.round,
+      center: Text(
+        '${days.toString()}\n${AppLocalizations.of(context)!.days}',
+        style: Theme.of(context).textTheme.headline4,
+        textAlign: TextAlign.center,
       ),
     );
   }

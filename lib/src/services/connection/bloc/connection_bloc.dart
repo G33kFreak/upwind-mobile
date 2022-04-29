@@ -43,7 +43,9 @@ class ConnectionBloc extends Bloc<ConnectionEvent, ConnectionState> {
         emit(const ConnectionState.connected());
         break;
       case ConnectivityResult.none:
-        emit(const ConnectionState.disconnected());
+        if (state.status != ConnectionStatus.unknown) {
+          emit(const ConnectionState.disconnected());
+        }
         break;
     }
   }

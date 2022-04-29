@@ -4,7 +4,7 @@ import 'package:upwind/src/repositories/habits_repository/src/models/habit_list_
 abstract class IHabitsRepository {
   Future<List<HabitListItem>> getHabits();
 
-  Future<HabitDetails> getHabitsDetails();
+  Future<HabitDetails> getHabitsDetails({required int id});
 
   Future<void> deleteHabit({required int id});
 }
