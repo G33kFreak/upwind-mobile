@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ErrorSnackbar extends StatelessWidget {
-  final String errorText;
+class MSnackbar extends StatelessWidget {
+  final String text;
+  final IconData? icon;
 
-  const ErrorSnackbar({
+  const MSnackbar({
     Key? key,
-    required this.errorText,
+    required this.text,
+    this.icon,
   }) : super(key: key);
 
   @override
@@ -15,14 +17,14 @@ class ErrorSnackbar extends StatelessWidget {
         Flexible(
           fit: FlexFit.tight,
           child: Icon(
-            Icons.error_outline,
+            icon ?? Icons.error_outline,
             color: Theme.of(context).snackBarTheme.contentTextStyle?.color,
           ),
         ),
         Flexible(
           fit: FlexFit.tight,
           flex: 7,
-          child: Text(errorText),
+          child: Text(text),
         )
       ],
     );

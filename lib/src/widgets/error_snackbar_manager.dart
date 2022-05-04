@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:upwind/src/widgets/error_snackbar.dart';
+import 'package:upwind/src/widgets/m_snackbar.dart';
 
 typedef ErrorMessageDelegate<ErrorType> = String Function(ErrorType error);
 
@@ -54,8 +54,8 @@ class _ErrorSnackbarManagerState<ErrorType>
     if (!widget.errorToSkip.contains(widget.error)) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: ErrorSnackbar(
-            errorText: widget.errorMessageDelegate(widget.error),
+          content: MSnackbar(
+            text: widget.errorMessageDelegate(widget.error),
           ),
         ),
       );

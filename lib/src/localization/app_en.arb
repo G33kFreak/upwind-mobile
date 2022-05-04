@@ -25,5 +25,6 @@
   "addRelapse":"Add relapse record",
   "addingRelapseDesc":"The reason will have impact on reports",
   "save":"Save",
-  "reasonEmptyError":"The reason has not to be empty"
+  "reasonEmptyError":"The reason has not to be empty",
+  "relapseAdded":"Relapse has been added"
 }

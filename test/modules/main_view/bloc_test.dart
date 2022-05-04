@@ -6,6 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:upwind/src/modules/main_view/bloc/main_view_bloc.dart';
 import 'package:upwind/src/modules/main_view/utils/exceptions.dart';
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
+import 'package:upwind/src/repositories/relapses_repository/relapses_repository.dart';
 import 'package:upwind/src/utils/dio_error_log_extract.dart';
 import 'package:upwind/src/utils/form_status.dart';
 
@@ -20,9 +21,10 @@ class TestHabitListItem extends MockHabitListItem {
   int get id => _id;
 }
 
-@GenerateMocks([HabitsRepository, HabitListItem])
+@GenerateMocks([HabitsRepository, HabitListItem, RelapsesRepository])
 void main() {
   final habitsRepository = MockHabitsRepository();
+  final relapsesRepository = MockRelapsesRepository();
   final habits = List.generate(10, (index) => TestHabitListItem(index));
   final dioError = DioError(
     requestOptions: RequestOptions(path: 'Test'),
@@ -38,7 +40,10 @@ void main() {
       when(habitsRepository.getHabits())
           .thenAnswer((_) => Future.value(habits));
     },
-    build: () => MainViewBloc(habitsRepository: habitsRepository),
+    build: () => MainViewBloc(
+      habitsRepository: habitsRepository,
+      relapsesRepository: relapsesRepository,
+    ),
     act: (bloc) => bloc.add(const LoadHabits()),
     expect: () => <MainViewState>[
       MainViewState(
@@ -50,7 +55,10 @@ void main() {
 
   blocTest<MainViewBloc, MainViewState>(
     'MainView turning menu ok',
-    build: () => MainViewBloc(habitsRepository: habitsRepository),
+    build: () => MainViewBloc(
+      habitsRepository: habitsRepository,
+      relapsesRepository: relapsesRepository,
+    ),
     act: (bloc) => bloc
       ..add(const TurnMainViewMenu())
       ..add(const TurnMainViewMenu())
@@ -71,7 +79,10 @@ void main() {
           .thenAnswer((_) => Future.value());
     },
     build: () {
-      final bloc = MainViewBloc(habitsRepository: habitsRepository);
+      final bloc = MainViewBloc(
+        habitsRepository: habitsRepository,
+        relapsesRepository: relapsesRepository,
+      );
       bloc.add(const LoadHabits());
       return bloc;
     },
@@ -100,7 +111,10 @@ void main() {
     setUp: () {
       when(habitsRepository.getHabits()).thenThrow(dioError);
     },
-    build: () => MainViewBloc(habitsRepository: habitsRepository),
+    build: () => MainViewBloc(
+      habitsRepository: habitsRepository,
+      relapsesRepository: relapsesRepository,
+    ),
     act: (bloc) => bloc.add(const LoadHabits()),
     errors: () => [
       MainViewBlocException(
@@ -123,7 +137,10 @@ void main() {
       when(habitsRepository.deleteHabit(id: anyNamed('id')))
           .thenThrow(dioError);
     },
-    build: () => MainViewBloc(habitsRepository: habitsRepository),
+    build: () => MainViewBloc(
+      habitsRepository: habitsRepository,
+      relapsesRepository: relapsesRepository,
+    ),
     act: (bloc) => bloc
       ..add(const LoadHabits())
       ..add(const DeleteHabit(habitId: 2)),

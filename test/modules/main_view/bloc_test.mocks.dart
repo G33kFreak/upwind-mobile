@@ -8,6 +8,10 @@ import 'package:dio/dio.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart'
     as _i3;
+import 'package:upwind/src/repositories/relapses_repository/relapses_repository.dart'
+    as _i5;
+import 'package:upwind/src/repositories/relapses_repository/src/api/relapses_endpoints.dart'
+    as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -116,4 +120,32 @@ class MockHabitListItem extends _i1.Mock implements _i3.HabitListItem {
   Map<String, dynamic> toJson() =>
       (super.noSuchMethod(Invocation.method(#toJson, []),
           returnValue: <String, dynamic>{}) as Map<String, dynamic>);
+}
+
+/// A class which mocks [RelapsesRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockRelapsesRepository extends _i1.Mock
+    implements _i5.RelapsesRepository {
+  MockRelapsesRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.Dio get authHttpClient =>
+      (super.noSuchMethod(Invocation.getter(#authHttpClient),
+          returnValue: _FakeDio_0()) as _i2.Dio);
+  @override
+  _i6.PostAddRelapse get postAddRelapse => (super.noSuchMethod(
+          Invocation.getter(#postAddRelapse),
+          returnValue: (_i2.Dio __p0, int __p1, String __p2) =>
+              Future<_i2.Response<dynamic>>.value(_FakeResponse_1<dynamic>()))
+      as _i6.PostAddRelapse);
+  @override
+  _i4.Future<void> createRelapse({int? habitId, String? reason}) =>
+      (super.noSuchMethod(
+          Invocation.method(
+              #createRelapse, [], {#habitId: habitId, #reason: reason}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
 }

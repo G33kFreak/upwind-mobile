@@ -24,3 +24,12 @@ class DeleteHabit extends MainViewEvent with _$DeleteHabitAutoequalMixin {
 
   const DeleteHabit({required this.habitId});
 }
+
+@autoequalMixin
+class AddRelapseToHabit extends MainViewEvent
+    with _$AddRelapseToHabitAutoequalMixin {
+  final String reason;
+  final int habitId;
+
+  const AddRelapseToHabit({required this.reason, required this.habitId});
+}
