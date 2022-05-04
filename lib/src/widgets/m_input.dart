@@ -96,6 +96,7 @@ class _MInputState extends State<MInput> {
               focusNode: _focusNode,
               obscureText: widget.hideText,
               keyboardType: widget.inputType,
+              style: Theme.of(context).textTheme.bodyText2,
               decoration: InputDecoration(
                 hintStyle: const TextStyle(color: textGrey),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 20),

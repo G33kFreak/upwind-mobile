@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:upwind/src/modules/habit_details/widgets/habit_details_error_manager.dart';
 import 'package:upwind/src/modules/login_view/bloc/login_view_bloc_provider.dart';
 import 'package:upwind/src/modules/login_view/widgets/animated_login_icon.dart';
 import 'package:upwind/src/modules/login_view/widgets/login_button.dart';
+import 'package:upwind/src/modules/login_view/widgets/login_error_snackbar_manager.dart';
 import 'package:upwind/src/modules/login_view/widgets/login_inputs.dart';
 
 class LoginView extends StatelessWidget implements AutoRouteWrapper {
@@ -23,6 +25,8 @@ class LoginView extends StatelessWidget implements AutoRouteWrapper {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
+                  HabitDetailsErrorManager(),
+                  LoginErrorSnackbarManager(),
                   Spacer(),
                   AnimatedLoginIcon(),
                   Spacer(),

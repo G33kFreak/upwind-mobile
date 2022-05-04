@@ -6,6 +6,10 @@ RoundedRectangleBorder _buttonBorderRadius = RoundedRectangleBorder(
   borderRadius: BorderRadius.circular(16.0),
 );
 
+RoundedRectangleBorder _defaultBorderRadius = RoundedRectangleBorder(
+  borderRadius: BorderRadius.circular(4.0),
+);
+
 EdgeInsetsGeometry _outlinedButtonPadding =
     const EdgeInsets.fromLTRB(24.0, 10.0, 24.0, 10.0);
 
@@ -81,6 +85,13 @@ class AppTheme {
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: purpleDark,
+        ),
+        snackBarTheme: SnackBarThemeData(
+          backgroundColor: purpleDark,
+          shape: _defaultBorderRadius,
+          behavior: SnackBarBehavior.floating,
+          elevation: 1,
+          contentTextStyle: _body1,
         ),
       );
 }
