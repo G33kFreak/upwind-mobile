@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:upwind/src/modules/main_view/utils/exceptions.dart';
 
 class HabitDetailsBlocException with EquatableMixin implements Exception {
   final String cause;
