@@ -58,7 +58,6 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
     // after that, we send a request to BE. If it throws some exception
     // we return removed item back to UI and show error
 
-    //TODO: Add some error snackbar
     final oldHabits = state.habits;
     final newHabits = List<HabitListItem>.from(state.habits)
       ..removeWhere((habit) => habit.id == event.habitId);

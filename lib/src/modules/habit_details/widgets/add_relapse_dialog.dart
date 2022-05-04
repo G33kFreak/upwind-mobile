@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:upwind/src/config/colors.dart';
+import 'package:upwind/src/widgets/error_snackbar.dart';
 import 'package:upwind/src/widgets/m_input.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -34,6 +35,16 @@ class _AddRelapseDialogState extends State<AddRelapseDialog> {
   }
 
   void _onSavePressed() {
+    if (reason.isEmpty) {
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: ErrorSnackbar(
+            errorText: AppLocalizations.of(context)!.reasonEmptyError,
+          ),
+        ),
+      );
+    }
     context.router.pop(reason.isNotEmpty ? reason : null);
   }
 
@@ -58,7 +69,6 @@ class _AddRelapseDialogState extends State<AddRelapseDialog> {
             AppLocalizations.of(context)!.addingRelapseDesc,
           ),
           const SizedBox(height: 24),
-          //TODO: Add snackbar for empty reason
           ElevatedButton(
             onPressed: _onSavePressed,
             child: Text(
