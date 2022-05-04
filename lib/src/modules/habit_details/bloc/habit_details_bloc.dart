@@ -2,8 +2,10 @@ import 'package:autoequal/autoequal.dart';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:upwind/src/modules/habit_details/utils/exceptions.dart';
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
 import 'package:upwind/src/repositories/relapses_repository/relapses_repository.dart';
+import 'package:upwind/src/utils/dio_error_log_extract.dart';
 import 'package:upwind/src/utils/form_status.dart';
 
 part 'habit_details_event.dart';
@@ -35,9 +37,12 @@ class HabitDetailsBloc extends Bloc<HabitDetailsEvent, HabitDetailsState> {
         habitDetails: habitDetails,
         relapsesLoadingStatus: const SuccessFormStatus(),
       ));
-      //TODO: Implement error state
-    } on DioError catch (_) {
-      rethrow;
+    } on DioError catch (e) {
+      throw _emitErrorState(
+        HabitDetailsBlocError.serverError,
+        emit,
+        convertDioErrorToLogMessage(e),
+      );
     }
   }
 
@@ -52,9 +57,27 @@ class HabitDetailsBloc extends Bloc<HabitDetailsEvent, HabitDetailsState> {
         reason: event.reason,
       );
       add(LoadHabitDetails(habitId: state.habitDetails!.id));
-      //TODO: Implement error state
-    } on DioError catch (_) {
-      rethrow;
+    } on DioError catch (e) {
+      throw _emitErrorState(
+        HabitDetailsBlocError.serverError,
+        emit,
+        convertDioErrorToLogMessage(e),
+      );
     }
+  }
+
+  HabitDetailsBlocException _emitErrorState(
+    HabitDetailsBlocError error,
+    Emitter<HabitDetailsState> emit, [
+    dynamic extra,
+  ]) {
+    emit(state.copyWith(
+      relapsesLoadingStatus: const ErrorFormStatus(),
+      error: error,
+    ));
+
+    final errorText = extra == null ? error.text : '${error.text} $extra';
+
+    return HabitDetailsBlocException(errorText);
   }
 }
