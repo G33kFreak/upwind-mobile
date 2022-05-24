@@ -27,7 +27,7 @@ class _ErrorSnackbarManagerState<ErrorType>
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
       (timeStamp) => _handleNewState(),
     );
   }

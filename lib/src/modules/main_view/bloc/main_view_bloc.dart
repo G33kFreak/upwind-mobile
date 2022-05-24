@@ -1,5 +1,5 @@
 import 'package:autoequal/autoequal.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:upwind/src/modules/main_view/utils/exceptions.dart';

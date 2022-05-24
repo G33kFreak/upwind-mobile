@@ -12,10 +12,15 @@ class RelapsesTitleAndButton extends StatelessWidget {
     final response = await showAddRelapseDialog(context);
 
     if (response != null && response.reason.isNotEmpty) {
-      context
-          .read<HabitDetailsBloc>()
-          .add(AddRelapseToHabit(reason: response.reason));
+      _emitAddRelapse(reason: response.reason, context: context);
     }
+  }
+
+  void _emitAddRelapse({
+    required String reason,
+    required BuildContext context,
+  }) {
+    context.read<HabitDetailsBloc>().add(AddRelapseToHabit(reason: reason));
   }
 
   @override

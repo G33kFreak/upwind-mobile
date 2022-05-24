@@ -46,9 +46,22 @@ class _MainMenuItemsState extends State<MainMenuItems>
     context.read<MainViewBloc>().add(const TurnMainViewMenu());
     final response = await showAddRelapseDialog(context, habits: habits);
     if (response != null && response.habit != null) {
-      context.read<MainViewBloc>().add(AddRelapseToHabit(
-          reason: response.reason, habitId: response.habit!.id));
+      _emitAddRelapseToHabit(
+        reason: response.reason,
+        habitId: response.habit!.id,
+        context: context,
+      );
     }
+  }
+
+  void _emitAddRelapseToHabit({
+    required String reason,
+    required int habitId,
+    required BuildContext context,
+  }) {
+    context
+        .read<MainViewBloc>()
+        .add(AddRelapseToHabit(reason: reason, habitId: habitId));
   }
 
   @override

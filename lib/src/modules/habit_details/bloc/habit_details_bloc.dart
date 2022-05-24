@@ -1,7 +1,7 @@
 import 'package:autoequal/autoequal.dart';
-import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upwind/src/modules/habit_details/utils/exceptions.dart';
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
 import 'package:upwind/src/repositories/relapses_repository/relapses_repository.dart';

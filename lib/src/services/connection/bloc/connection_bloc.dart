@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:autoequal/autoequal.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:equatable/equatable.dart';
 import 'package:upwind/src/repositories/connection_repository/connection_repository.dart';

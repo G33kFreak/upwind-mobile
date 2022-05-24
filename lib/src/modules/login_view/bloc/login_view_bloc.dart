@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:autoequal/autoequal.dart';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:http_status_code/http_status_code.dart';
