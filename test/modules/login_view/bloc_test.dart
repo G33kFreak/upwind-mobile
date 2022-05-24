@@ -196,7 +196,7 @@ void main() {
         email: 'Email2',
         password: 'Password',
         formStatus: InitFormStatus(),
-        error: LoginBlocError.invalidLoginData,
+        error: LoginBlocError.none,
       )
     ],
   );
