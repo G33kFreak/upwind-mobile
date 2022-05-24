@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:upwind/src/modules/habit_details/widgets/add_relapse_dialog.dart';
 import 'package:upwind/src/modules/main_view/bloc/main_view_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:upwind/src/modules/main_view/widgets/habits_list/add_habit_dialog.dart';
 import 'package:upwind/src/modules/main_view/widgets/menu/main_view_menu_item.dart';
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
 
@@ -42,7 +43,7 @@ class _MainMenuItemsState extends State<MainMenuItems>
     return Offset(0, yOffset);
   }
 
-  void _onAddRelapsePressed(List<HabitListItem> habits) async {
+  Future<void> _onAddRelapsePressed(List<HabitListItem> habits) async {
     context.read<MainViewBloc>().add(const TurnMainViewMenu());
     final response = await showAddRelapseDialog(context, habits: habits);
     if (response != null && response.habit != null) {
@@ -52,6 +53,31 @@ class _MainMenuItemsState extends State<MainMenuItems>
         context: context,
       );
     }
+  }
+
+  Future<void> _onAddHabitPressed() async {
+    context.read<MainViewBloc>().add(const TurnMainViewMenu());
+    final response = await showAddHabitDialog(context);
+    if (response != null) {
+      _emitAddHabit(
+        habitTitle: response.name,
+        moneyPerWeek: response.moneySpendWeekly,
+        timePerWeek: response.timeSpendWeekly,
+        context: context,
+      );
+    }
+  }
+
+  void _emitAddHabit({
+    required String habitTitle,
+    required double moneyPerWeek,
+    required double timePerWeek,
+    required BuildContext context,
+  }) {
+    context.read<MainViewBloc>().add(AddHabit(
+        habitTitle: habitTitle,
+        moneyPerWeek: moneyPerWeek,
+        timePerWeek: timePerWeek));
   }
 
   void _emitAddRelapseToHabit({
@@ -104,7 +130,7 @@ class _MainMenuItemsState extends State<MainMenuItems>
                     MainViewMenuItem(
                       icon: Icons.add_box_rounded,
                       title: AppLocalizations.of(context)!.newHabit,
-                      onPressed: () {},
+                      onPressed: () => _onAddHabitPressed(),
                     ),
                   ],
                 ),

@@ -169,4 +169,53 @@ void main() {
       )
     ],
   );
+
+  final habitsAfterAdding =
+      List<TestHabitListItem>.from([...habits, TestHabitListItem(10)]);
+  blocTest<MainViewBloc, MainViewState>(
+    'MainView adding habit ok',
+    setUp: () {
+      int requestCounter = 0;
+      when(habitsRepository.getHabits()).thenAnswer((_) {
+        if (requestCounter == 0) {
+          requestCounter++;
+          return Future.value(habits);
+        } else {
+          return Future.value(habitsAfterAdding);
+        }
+      });
+      when(habitsRepository.createHabit(
+        habitName: 'test',
+        moneyPerWeek: 1,
+        timePerWeek: 1,
+      )).thenAnswer((_) => Future.value());
+    },
+    build: () => MainViewBloc(
+      habitsRepository: habitsRepository,
+      relapsesRepository: relapsesRepository,
+    ),
+    act: (bloc) => bloc
+      ..add(const LoadHabits())
+      ..add(
+        const AddHabit(
+          habitTitle: 'test',
+          moneyPerWeek: 1,
+          timePerWeek: 1,
+        ),
+      ),
+    expect: () => <MainViewState>[
+      MainViewState(
+        listLoadingStatus: const SuccessFormStatus(),
+        habits: habits,
+      ),
+      MainViewState(
+        listLoadingStatus: const LoadingFormStatus(),
+        habits: habits,
+      ),
+      MainViewState(
+        listLoadingStatus: const SuccessFormStatus(),
+        habits: habitsAfterAdding,
+      )
+    ],
+  );
 }

@@ -7,12 +7,14 @@ class HabitsRepository implements IHabitsRepository {
   final GetHabitsList getHabitsList;
   final DeleteHabitItem deleteHabitItem;
   final GetHabitDetails getHabitDetails;
+  final PostHabit postHabit;
 
   const HabitsRepository({
     required this.authHttpClient,
     required this.getHabitsList,
     required this.deleteHabitItem,
     required this.getHabitDetails,
+    required this.postHabit,
   });
 
   @override
@@ -42,4 +44,12 @@ class HabitsRepository implements IHabitsRepository {
         authHttpClient,
         id,
       );
+
+  @override
+  Future<void> createHabit({
+    required String habitName,
+    required double moneyPerWeek,
+    required double timePerWeek,
+  }) async =>
+      await postHabit(authHttpClient, habitName, moneyPerWeek, timePerWeek);
 }

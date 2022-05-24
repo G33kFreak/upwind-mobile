@@ -33,3 +33,16 @@ class AddRelapseToHabit extends MainViewEvent
 
   const AddRelapseToHabit({required this.reason, required this.habitId});
 }
+
+@autoequalMixin
+class AddHabit extends MainViewEvent with _$AddHabitAutoequalMixin {
+  final String habitTitle;
+  final double moneyPerWeek;
+  final double timePerWeek;
+
+  const AddHabit({
+    required this.habitTitle,
+    required this.moneyPerWeek,
+    required this.timePerWeek,
+  });
+}

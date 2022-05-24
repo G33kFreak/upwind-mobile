@@ -26,5 +26,9 @@
   "addingRelapseDesc":"The reason will have impact on reports",
   "save":"Save",
   "reasonEmptyError":"The reason has not to be empty",
-  "relapseAdded":"Relapse has been added"
+  "relapseAdded":"Relapse has been added",
+  "habitTitle":"Habit title",
+  "moneySpendWeekly":"Money spend weekly",
+  "timeSpendWeekly": "Time spend weekly",
+  "habitTitleEmptyError":"The title of habit has not to be empty"
 }

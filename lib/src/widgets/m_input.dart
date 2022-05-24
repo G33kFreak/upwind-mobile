@@ -10,6 +10,7 @@ class MInput extends StatefulWidget {
   final void Function(String)? onChanged;
   final void Function()? onEditingComplete;
   final TextInputType? inputType;
+  final TextAlign textAlign;
 
   const MInput({
     Key? key,
@@ -21,6 +22,7 @@ class MInput extends StatefulWidget {
     this.onChanged,
     this.onEditingComplete,
     this.inputType,
+    this.textAlign = TextAlign.start,
   }) : super(key: key);
 
   @override
@@ -97,6 +99,7 @@ class _MInputState extends State<MInput> {
               obscureText: widget.hideText,
               keyboardType: widget.inputType,
               style: Theme.of(context).textTheme.bodyText2,
+              textAlign: widget.textAlign,
               decoration: InputDecoration(
                 hintStyle: const TextStyle(color: textGrey),
                 contentPadding: const EdgeInsets.symmetric(horizontal: 20),
