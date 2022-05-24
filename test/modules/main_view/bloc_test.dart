@@ -218,4 +218,50 @@ void main() {
       )
     ],
   );
+
+  blocTest<MainViewBloc, MainViewState>(
+    'MainView adding habit throws DioError',
+    setUp: () {
+      when(habitsRepository.getHabits())
+          .thenAnswer((_) => Future.value(habits));
+      when(habitsRepository.createHabit(
+        habitName: 'test',
+        moneyPerWeek: 1,
+        timePerWeek: 1,
+      )).thenThrow(dioError);
+    },
+    build: () => MainViewBloc(
+      habitsRepository: habitsRepository,
+      relapsesRepository: relapsesRepository,
+    ),
+    errors: () => [
+      MainViewBlocException(
+        '${MainViewBlocError.serverError.text} ${convertDioErrorToLogMessage(dioError)}',
+      )
+    ],
+    act: (bloc) => bloc
+      ..add(const LoadHabits())
+      ..add(
+        const AddHabit(
+          habitTitle: 'test',
+          moneyPerWeek: 1,
+          timePerWeek: 1,
+        ),
+      ),
+    expect: () => <MainViewState>[
+      MainViewState(
+        listLoadingStatus: const SuccessFormStatus(),
+        habits: habits,
+      ),
+      MainViewState(
+        listLoadingStatus: const LoadingFormStatus(),
+        habits: habits,
+      ),
+      MainViewState(
+        habits: habits,
+        listLoadingStatus: const ErrorFormStatus(),
+        error: MainViewBlocError.serverError,
+      )
+    ],
+  );
 }
