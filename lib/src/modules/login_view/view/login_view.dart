@@ -25,7 +25,6 @@ class LoginView extends StatelessWidget implements AutoRouteWrapper {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
-                  HabitDetailsErrorManager(),
                   LoginErrorSnackbarManager(),
                   Spacer(),
                   AnimatedLoginIcon(),

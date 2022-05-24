@@ -32,6 +32,7 @@ class LoginViewBloc extends Bloc<LoginViewEvent, LoginViewState> {
     emit(state.copyWith(
       email: event.email,
       formStatus: const InitFormStatus(),
+      error: LoginBlocError.none,
     ));
   }
 
@@ -42,6 +43,7 @@ class LoginViewBloc extends Bloc<LoginViewEvent, LoginViewState> {
     emit(state.copyWith(
       password: event.password,
       formStatus: const InitFormStatus(),
+      error: LoginBlocError.none,
     ));
   }
 
