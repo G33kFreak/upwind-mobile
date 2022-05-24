@@ -7,8 +7,8 @@ import 'package:upwind/src/repositories/tokens_repository/src/abstract_tokens_re
 class MInterceptor implements InterceptorsWrapper {
   final ITokensRepository _tokensRepository;
 
-  MInterceptor(ITokensRepository _tokensRepository)
-      : _tokensRepository = _tokensRepository;
+  MInterceptor(ITokensRepository tokensRepository)
+      : _tokensRepository = tokensRepository;
 
   final unauthCodes = [StatusCode.UNAUTHORIZED, StatusCode.FORBIDDEN];
 

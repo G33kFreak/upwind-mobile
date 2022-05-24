@@ -9,11 +9,18 @@ class RelapsesTitleAndButton extends StatelessWidget {
   const RelapsesTitleAndButton({Key? key}) : super(key: key);
 
   Future<void> _onAddRelapsePressed(BuildContext context) async {
-    final reason = await showAddRelapseDialog(context);
+    final response = await showAddRelapseDialog(context);
 
-    if (reason != null && reason.isNotEmpty) {
-      context.read<HabitDetailsBloc>().add(AddRelapseToHabit(reason: reason));
+    if (response != null && response.reason.isNotEmpty) {
+      _emitAddRelapse(reason: response.reason, context: context);
     }
+  }
+
+  void _emitAddRelapse({
+    required String reason,
+    required BuildContext context,
+  }) {
+    context.read<HabitDetailsBloc>().add(AddRelapseToHabit(reason: reason));
   }
 
   @override

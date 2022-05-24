@@ -10,13 +10,14 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  auto_route: ^3.2.4
+  auto_route: ^4.0.1
   autoequal: ^0.3.0
   equatable: ^2.0.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
-  json_serializable: ^6.1.5
+  json_annotation: ^4.5.0
+  json_serializable: ^6.2.0
   flutter_localizations:
     sdk: flutter
   hive: ^2.0.6
@@ -35,10 +36,10 @@ dependencies:
   flutter_animated_dialog: ^2.0.1
 
 dev_dependencies:
-  auto_route_generator: ^3.2.3
+  auto_route_generator: ^4.0.0
   autoequal_gen: ^0.3.0
   build_runner: ^2.1.7
-  flutter_lints: ^1.0.4
+  flutter_lints: ^2.0.1
   flutter_native_splash: ^2.0.5
   flutter_test:
     sdk: flutter

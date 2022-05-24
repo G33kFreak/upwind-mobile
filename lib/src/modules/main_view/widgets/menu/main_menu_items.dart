@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:upwind/src/modules/habit_details/widgets/add_relapse_dialog.dart';
 import 'package:upwind/src/modules/main_view/bloc/main_view_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:upwind/src/modules/main_view/widgets/menu/main_view_menu_item.dart';
+import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
 
 class MainMenuItems extends StatefulWidget {
   const MainMenuItems({Key? key}) : super(key: key);
@@ -40,6 +42,28 @@ class _MainMenuItemsState extends State<MainMenuItems>
     return Offset(0, yOffset);
   }
 
+  void _onAddRelapsePressed(List<HabitListItem> habits) async {
+    context.read<MainViewBloc>().add(const TurnMainViewMenu());
+    final response = await showAddRelapseDialog(context, habits: habits);
+    if (response != null && response.habit != null) {
+      _emitAddRelapseToHabit(
+        reason: response.reason,
+        habitId: response.habit!.id,
+        context: context,
+      );
+    }
+  }
+
+  void _emitAddRelapseToHabit({
+    required String reason,
+    required int habitId,
+    required BuildContext context,
+  }) {
+    context
+        .read<MainViewBloc>()
+        .add(AddRelapseToHabit(reason: reason, habitId: habitId));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<MainViewBloc, MainViewState>(
@@ -56,33 +80,37 @@ class _MainMenuItemsState extends State<MainMenuItems>
           offset: getTransitionOffset(context),
           child: child,
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            MainViewMenuItem(
-              icon: Icons.info_rounded,
-              title: AppLocalizations.of(context)!.showRaport,
-              onPressed: () {},
-            ),
-            const SizedBox(height: 24),
-            Row(
+        child: BlocBuilder<MainViewBloc, MainViewState>(
+          builder: (context, state) {
+            return Column(
               mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 MainViewMenuItem(
-                  icon: Icons.message,
-                  title: AppLocalizations.of(context)!.newRelapse,
+                  icon: Icons.info_rounded,
+                  title: AppLocalizations.of(context)!.showRaport,
                   onPressed: () {},
                 ),
-                const SizedBox(width: 24),
-                MainViewMenuItem(
-                  icon: Icons.add_box_rounded,
-                  title: AppLocalizations.of(context)!.newHabit,
-                  onPressed: () {},
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    MainViewMenuItem(
+                      icon: Icons.message,
+                      title: AppLocalizations.of(context)!.newRelapse,
+                      onPressed: () => _onAddRelapsePressed(state.habits),
+                    ),
+                    const SizedBox(width: 24),
+                    MainViewMenuItem(
+                      icon: Icons.add_box_rounded,
+                      title: AppLocalizations.of(context)!.newHabit,
+                      onPressed: () {},
+                    ),
+                  ],
                 ),
               ],
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
