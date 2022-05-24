@@ -15,3 +15,13 @@ typedef GetHabitDetails = Future<Response> Function(Dio, int);
 
 final GetHabitDetails getHabitDetails =
     (Dio httpClient, int habitId) => httpClient.get('/api/habit/$habitId/');
+
+typedef PostHabit = Future<Response> Function(Dio, String, double, double);
+
+final PostHabit postHabit =
+    (Dio httpClient, String name, double moneyPerWeek, double timePerWeek) =>
+        httpClient.post('/api/habits/', data: {
+          'name': name,
+          'time_spend_weekly': timePerWeek,
+          'money_spend_weekly': moneyPerWeek,
+        });

@@ -7,4 +7,10 @@ abstract class IHabitsRepository {
   Future<HabitDetails> getHabitsDetails({required int id});
 
   Future<void> deleteHabit({required int id});
+
+  Future<void> createHabit({
+    required String habitName,
+    required double moneyPerWeek,
+    required double timePerWeek,
+  });
 }

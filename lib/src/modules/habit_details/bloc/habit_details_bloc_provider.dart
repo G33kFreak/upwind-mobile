@@ -25,6 +25,7 @@ class HabitDetailsBlocProvider extends StatelessWidget {
             getHabitDetails: getHabitDetails,
             getHabitsList: getHabitsList,
             deleteHabitItem: deleteHabitItem,
+            postHabit: postHabit,
           ),
           relapsesRepository: RelapsesRepository(
             authHttpClient: context.read<ApiProvider>().authenticatedHttpClient,

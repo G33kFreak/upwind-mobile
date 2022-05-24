@@ -24,6 +24,7 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
     on<LoadHabits>(_onLoadHabits);
     on<DeleteHabit>(_onDeleteHabit);
     on<AddRelapseToHabit>(_onAddRelapse);
+    on<AddHabit>(_onAddHabit);
   }
 
   void _onMenuTurned(TurnMainViewMenu event, Emitter<MainViewState> emit) {
@@ -90,7 +91,27 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
         habitId: event.habitId,
         reason: event.reason,
       );
-      emit(state.copyWith(listLoadingStatus: const SuccessFormStatus()));
+    } on DioError catch (e) {
+      throw _emitErrorState(
+        MainViewBlocError.serverError,
+        emit,
+        convertDioErrorToLogMessage(e),
+      );
+    }
+  }
+
+  Future<void> _onAddHabit(
+    AddHabit event,
+    Emitter<MainViewState> emit,
+  ) async {
+    try {
+      emit(state.copyWith(listLoadingStatus: const LoadingFormStatus()));
+      await habitsRepository.createHabit(
+        habitName: event.habitTitle,
+        moneyPerWeek: event.moneyPerWeek,
+        timePerWeek: event.timePerWeek,
+      );
+      add(const LoadHabits());
     } on DioError catch (e) {
       throw _emitErrorState(
         MainViewBlocError.serverError,

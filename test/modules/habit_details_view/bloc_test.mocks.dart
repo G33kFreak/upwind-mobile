@@ -62,6 +62,12 @@ class MockHabitsRepository extends _i1.Mock implements _i3.HabitsRepository {
               Future<_i2.Response<dynamic>>.value(_FakeResponse_1<dynamic>()))
       as _i3.GetHabitDetails);
   @override
+  _i3.PostHabit get postHabit => (super.noSuchMethod(
+          Invocation.getter(#postHabit),
+          returnValue: (_i2.Dio __p0, String __p1, double __p2, double __p3) =>
+              Future<_i2.Response<dynamic>>.value(_FakeResponse_1<dynamic>()))
+      as _i3.PostHabit);
+  @override
   _i4.Future<List<_i3.HabitListItem>> getHabits() =>
       (super.noSuchMethod(Invocation.method(#getHabits, []),
               returnValue:
@@ -76,6 +82,17 @@ class MockHabitsRepository extends _i1.Mock implements _i3.HabitsRepository {
   @override
   _i4.Future<void> deleteHabit({int? id}) =>
       (super.noSuchMethod(Invocation.method(#deleteHabit, [], {#id: id}),
+          returnValue: Future<void>.value(),
+          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+  @override
+  _i4.Future<void> createHabit(
+          {String? habitName, double? moneyPerWeek, double? timePerWeek}) =>
+      (super.noSuchMethod(
+          Invocation.method(#createHabit, [], {
+            #habitName: habitName,
+            #moneyPerWeek: moneyPerWeek,
+            #timePerWeek: timePerWeek
+          }),
           returnValue: Future<void>.value(),
           returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
 }
