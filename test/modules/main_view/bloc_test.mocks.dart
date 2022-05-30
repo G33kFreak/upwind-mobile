@@ -2,16 +2,18 @@
 // in upwind/test/modules/main_view/bloc_test.dart.
 // Do not manually edit this file.
 
-import 'dart:async' as _i4;
+import 'dart:async' as _i5;
 
 import 'package:dio/dio.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart'
     as _i3;
 import 'package:upwind/src/repositories/relapses_repository/relapses_repository.dart'
-    as _i5;
-import 'package:upwind/src/repositories/relapses_repository/src/api/relapses_endpoints.dart'
     as _i6;
+import 'package:upwind/src/repositories/relapses_repository/src/api/relapses_endpoints.dart'
+    as _i7;
+import 'package:upwind/src/repositories/relapses_repository/src/models/report.dart'
+    as _i4;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -30,6 +32,8 @@ class _FakeResponse_1<T> extends _i1.Fake implements _i2.Response<T> {}
 class _FakeHabitDetails_2 extends _i1.Fake implements _i3.HabitDetails {}
 
 class _FakeDateTime_3 extends _i1.Fake implements DateTime {}
+
+class _FakeReport_4 extends _i1.Fake implements _i4.Report {}
 
 /// A class which mocks [HabitsRepository].
 ///
@@ -68,24 +72,24 @@ class MockHabitsRepository extends _i1.Mock implements _i3.HabitsRepository {
               Future<_i2.Response<dynamic>>.value(_FakeResponse_1<dynamic>()))
       as _i3.PostHabit);
   @override
-  _i4.Future<List<_i3.HabitListItem>> getHabits() =>
+  _i5.Future<List<_i3.HabitListItem>> getHabits() =>
       (super.noSuchMethod(Invocation.method(#getHabits, []),
               returnValue:
                   Future<List<_i3.HabitListItem>>.value(<_i3.HabitListItem>[]))
-          as _i4.Future<List<_i3.HabitListItem>>);
+          as _i5.Future<List<_i3.HabitListItem>>);
   @override
-  _i4.Future<_i3.HabitDetails> getHabitsDetails({int? id}) =>
+  _i5.Future<_i3.HabitDetails> getHabitsDetails({int? id}) =>
       (super.noSuchMethod(Invocation.method(#getHabitsDetails, [], {#id: id}),
               returnValue:
                   Future<_i3.HabitDetails>.value(_FakeHabitDetails_2()))
-          as _i4.Future<_i3.HabitDetails>);
+          as _i5.Future<_i3.HabitDetails>);
   @override
-  _i4.Future<void> deleteHabit({int? id}) =>
+  _i5.Future<void> deleteHabit({int? id}) =>
       (super.noSuchMethod(Invocation.method(#deleteHabit, [], {#id: id}),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
   @override
-  _i4.Future<void> createHabit(
+  _i5.Future<void> createHabit(
           {String? habitName, double? moneyPerWeek, double? timePerWeek}) =>
       (super.noSuchMethod(
           Invocation.method(#createHabit, [], {
@@ -94,7 +98,7 @@ class MockHabitsRepository extends _i1.Mock implements _i3.HabitsRepository {
             #timePerWeek: timePerWeek
           }),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
 }
 
 /// A class which mocks [HabitListItem].
@@ -143,7 +147,7 @@ class MockHabitListItem extends _i1.Mock implements _i3.HabitListItem {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockRelapsesRepository extends _i1.Mock
-    implements _i5.RelapsesRepository {
+    implements _i6.RelapsesRepository {
   MockRelapsesRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -153,16 +157,34 @@ class MockRelapsesRepository extends _i1.Mock
       (super.noSuchMethod(Invocation.getter(#authHttpClient),
           returnValue: _FakeDio_0()) as _i2.Dio);
   @override
-  _i6.PostAddRelapse get postAddRelapse => (super.noSuchMethod(
+  _i7.PostAddRelapse get postAddRelapse => (super.noSuchMethod(
           Invocation.getter(#postAddRelapse),
           returnValue: (_i2.Dio __p0, int __p1, String __p2) =>
               Future<_i2.Response<dynamic>>.value(_FakeResponse_1<dynamic>()))
-      as _i6.PostAddRelapse);
+      as _i7.PostAddRelapse);
   @override
-  _i4.Future<void> createRelapse({int? habitId, String? reason}) =>
+  _i7.PostReport get postReport => (super.noSuchMethod(
+          Invocation.getter(#postReport),
+          returnValue: (_i2.Dio __p0, DateTime __p1, DateTime __p2,
+                  int? __p3) =>
+              Future<_i2.Response<dynamic>>.value(_FakeResponse_1<dynamic>()))
+      as _i7.PostReport);
+  @override
+  _i5.Future<void> createRelapse({int? habitId, String? reason}) =>
       (super.noSuchMethod(
           Invocation.method(
               #createRelapse, [], {#habitId: habitId, #reason: reason}),
           returnValue: Future<void>.value(),
-          returnValueForMissingStub: Future<void>.value()) as _i4.Future<void>);
+          returnValueForMissingStub: Future<void>.value()) as _i5.Future<void>);
+  @override
+  _i5.Future<_i4.Report> generateReport(
+          {DateTime? startDate, DateTime? endDate, int? habitId}) =>
+      (super.noSuchMethod(
+              Invocation.method(#generateReport, [], {
+                #startDate: startDate,
+                #endDate: endDate,
+                #habitId: habitId
+              }),
+              returnValue: Future<_i4.Report>.value(_FakeReport_4()))
+          as _i5.Future<_i4.Report>);
 }

@@ -46,3 +46,11 @@ class AddHabit extends MainViewEvent with _$AddHabitAutoequalMixin {
     required this.timePerWeek,
   });
 }
+
+@autoequalMixin
+class GenerateRaport extends MainViewEvent with _$GenerateRaportAutoequalMixin {
+  final DateTime startDate;
+  final DateTime endDate;
+
+  const GenerateRaport({required this.startDate, required this.endDate});
+}

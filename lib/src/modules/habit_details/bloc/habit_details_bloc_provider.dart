@@ -30,6 +30,7 @@ class HabitDetailsBlocProvider extends StatelessWidget {
           relapsesRepository: RelapsesRepository(
             authHttpClient: context.read<ApiProvider>().authenticatedHttpClient,
             postAddRelapse: postAddRelapse,
+            postReport: postReport,
           ),
         );
         final habitId = HabitDetailsView.getProvidedHabit(context).id;

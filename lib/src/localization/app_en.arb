@@ -30,5 +30,6 @@
   "habitTitle":"Habit title",
   "moneySpendWeekly":"Money spend weekly",
   "timeSpendWeekly": "Time spend weekly",
-  "habitTitleEmptyError":"The title of habit has not to be empty"
+  "habitTitleEmptyError":"The title of habit has not to be empty",
+  "notEnoughData":"Not enough data"
 }

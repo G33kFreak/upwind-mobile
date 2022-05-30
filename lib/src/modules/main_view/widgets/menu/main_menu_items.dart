@@ -5,6 +5,7 @@ import 'package:upwind/src/modules/main_view/bloc/main_view_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:upwind/src/modules/main_view/widgets/habits_list/add_habit_dialog.dart';
 import 'package:upwind/src/modules/main_view/widgets/menu/main_view_menu_item.dart';
+import 'package:upwind/src/modules/report_view/widgets/date_range_dialog.dart';
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
 
 class MainMenuItems extends StatefulWidget {
@@ -68,6 +69,22 @@ class _MainMenuItemsState extends State<MainMenuItems>
     }
   }
 
+  Future<void> _onShowRaportPressed() async {
+    context.read<MainViewBloc>().add(const TurnMainViewMenu());
+    final response = await openDateRangePicker(context);
+
+    if (response != null) {
+      _emitGenerateRaport(response);
+    }
+  }
+
+  void _emitGenerateRaport(DateTimeRange timeRange) {
+    context.read<MainViewBloc>().add(GenerateRaport(
+          startDate: timeRange.start,
+          endDate: timeRange.end,
+        ));
+  }
+
   void _emitAddHabit({
     required String habitTitle,
     required double moneyPerWeek,
@@ -115,7 +132,7 @@ class _MainMenuItemsState extends State<MainMenuItems>
                 MainViewMenuItem(
                   icon: Icons.info_rounded,
                   title: AppLocalizations.of(context)!.showRaport,
-                  onPressed: () {},
+                  onPressed: _onShowRaportPressed,
                 ),
                 const SizedBox(height: 24),
                 Row(
@@ -130,7 +147,7 @@ class _MainMenuItemsState extends State<MainMenuItems>
                     MainViewMenuItem(
                       icon: Icons.add_box_rounded,
                       title: AppLocalizations.of(context)!.newHabit,
-                      onPressed: () => _onAddHabitPressed(),
+                      onPressed: _onAddHabitPressed,
                     ),
                   ],
                 ),

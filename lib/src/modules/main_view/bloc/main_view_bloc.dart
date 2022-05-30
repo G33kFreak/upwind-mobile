@@ -2,9 +2,12 @@ import 'package:autoequal/autoequal.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:http_status_code/http_status_code.dart';
+import 'package:upwind/src/config/api/exceptions.dart';
 import 'package:upwind/src/modules/main_view/utils/exceptions.dart';
 import 'package:upwind/src/repositories/habits_repository/habits_repository.dart';
 import 'package:upwind/src/repositories/relapses_repository/relapses_repository.dart';
+import 'package:upwind/src/repositories/relapses_repository/src/models/report.dart';
 import 'package:upwind/src/utils/dio_error_log_extract.dart';
 import 'package:upwind/src/utils/form_status.dart';
 
@@ -25,6 +28,7 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
     on<DeleteHabit>(_onDeleteHabit);
     on<AddRelapseToHabit>(_onAddRelapse);
     on<AddHabit>(_onAddHabit);
+    on<GenerateRaport>(_onGenerateRaport);
   }
 
   void _onMenuTurned(TurnMainViewMenu event, Emitter<MainViewState> emit) {
@@ -121,12 +125,49 @@ class MainViewBloc extends Bloc<MainViewEvent, MainViewState> {
     }
   }
 
+  Future<void> _onGenerateRaport(
+    GenerateRaport event,
+    Emitter<MainViewState> emit,
+  ) async {
+    emit(GeneratingRaportState(stateBefore: state));
+    await Future.delayed(const Duration(milliseconds: 300));
+    try {
+      final raport = await relapsesRepository.generateReport(
+        startDate: event.startDate,
+        endDate: event.endDate,
+      );
+
+      final newState = (state as GeneratingRaportState)
+          .stateBefore
+          .copyWith(generatedReport: raport);
+
+      emit(newState);
+    } on DioError catch (e) {
+      _emitErrorState(
+        e.response?.statusCode == StatusCode.REQUESTED_RANGE_NOT_SATISFIABLE
+            ? MainViewBlocError.notEnoughData
+            : MainViewBlocError.serverError,
+        emit,
+        convertDioErrorToLogMessage(e),
+      );
+    } on ApiResponseParseException catch (_) {
+      _emitErrorState(
+        MainViewBlocError.serverError,
+        emit,
+      );
+    }
+  }
+
   MainViewBlocException _emitErrorState(
     MainViewBlocError error,
     Emitter<MainViewState> emit, [
     dynamic extra,
   ]) {
-    emit(state.copyWith(
+    final newState = state is GeneratingRaportState
+        ? (state as GeneratingRaportState).stateBefore
+        : state;
+
+    emit(newState.copyWith(
       listLoadingStatus: const ErrorFormStatus(),
       error: error,
     ));

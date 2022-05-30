@@ -4,6 +4,7 @@ import 'package:upwind/src/config/routes/habit_details.dart';
 import 'package:upwind/src/config/routes/login.dart';
 import 'package:upwind/src/config/routes/main.dart';
 import 'package:upwind/src/config/routes/no_connection.dart';
+import 'package:upwind/src/config/routes/report.dart';
 import 'package:upwind/src/config/routes/welcome.dart';
 
 part 'routes.gr.dart';
@@ -14,6 +15,7 @@ class Routes {
   static const main = MainRouteHelper();
   static const noConnection = NoConnectionRouteHelper();
   static const habitDetails = HabitDetailsRouteHelper();
+  static const report = ReportRouteHelper();
 }
 
 @AdaptiveAutoRouter(routes: [
@@ -38,6 +40,10 @@ class Routes {
     page: HabitDetailsRouteHelper.widget,
     path: HabitDetailsRouteHelper.path,
     transitionsBuilder: TransitionsBuilders.fadeIn,
+  ),
+  AutoRoute(
+    page: ReportRouteHelper.widget,
+    path: ReportRouteHelper.path,
   )
 ])
 class AppRouter extends _$AppRouter {}

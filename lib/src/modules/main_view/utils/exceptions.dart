@@ -13,7 +13,7 @@ class MainViewBlocException with EquatableMixin implements Exception {
   List<Object?> get props => [cause];
 }
 
-enum MainViewBlocError { serverError, none }
+enum MainViewBlocError { serverError, none, notEnoughData }
 
 extension StringValuesForErrors on MainViewBlocError {
   String get text {
@@ -22,6 +22,8 @@ extension StringValuesForErrors on MainViewBlocError {
         return 'Server error';
       case MainViewBlocError.none:
         return 'No error';
+      case MainViewBlocError.notEnoughData:
+        return 'Not enough data';
     }
   }
 
@@ -31,6 +33,8 @@ extension StringValuesForErrors on MainViewBlocError {
         return appLocalizations.serverError;
       case MainViewBlocError.none:
         return appLocalizations.noError;
+      case MainViewBlocError.notEnoughData:
+        return appLocalizations.notEnoughData;
     }
   }
 }
